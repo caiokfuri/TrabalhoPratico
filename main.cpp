@@ -1,9 +1,9 @@
-#include <cabecalhos.h>
+#include "cabecalhos.h"
 
 using namespace std;
 
 int main(){
-    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "Portuguese");
     int opt = 0;
 
     do {
@@ -34,6 +34,4 @@ int main(){
         }
         cout << endl;
     } while(opt != 4);
-
-    
 }

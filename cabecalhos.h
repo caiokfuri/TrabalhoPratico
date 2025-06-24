@@ -3,5 +3,7 @@
 
 #include <iostream>
 #include <locale.h>
+#include <vector>
+
 
 #endif
