@@ -1,6 +1,8 @@
-#include <cabecalhos.h>
+#include "cabecalhos.h"
 #include "Services/VeiculoService.h"
 #include "Services/LocalService.h"
+#include "Services/PedidoService.h"
+
 
 using namespace std;
 
@@ -9,6 +11,7 @@ int main() {
     int opt = 0;
     vector<Veiculo> veiculos;
     vector<Local> locais;
+    vector<PedidoModel> pedidos;
     // vector<pedido> pedidos;
 
     do {
@@ -30,7 +33,7 @@ int main() {
                 break;
             case 3:
                 cout << "Você escolheu o Menu Pedidos." << endl;
-                //menuPedidos(pedidos)
+                menuPedidos(pedidos);
                 break;
             case 4:
                 cout << "Saindo do programa..." << endl;

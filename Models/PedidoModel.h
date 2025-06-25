@@ -13,6 +13,10 @@ public:
     PedidoModel(int pedidoId, Local origem, Local destino, double peso);
     void preencher();
     void mostrar() const;
+
+    int getId() const;
+    Local& getLocalOrigem();
+    Local& getLocalDestino();
 };
 
 #endif
