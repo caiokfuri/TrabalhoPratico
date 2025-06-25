@@ -1,34 +1,45 @@
-#include <iostream>
-#include <vector>
+#include <cabecalhos.h>
 #include "Services/VeiculoService.h"
+#include "Services/LocalService.h"
+
+using namespace std;
 
 int main() {
-    std::vector<Veiculo> veiculos;
-    int opcao;
+    setlocale(LC_ALL, "");
+    int opt = 0;
+    vector<Veiculo> veiculos;
+    vector<Local> locais;
+    // vector<pedido> pedidos;
 
     do {
-        std::cout << "\n==== MENU VEÍCULOS ====\n";
-        std::cout << "1 - Adicionar Veículo\n";
-        std::cout << "2 - Remover Veículo\n";
-        std::cout << "3 - Atualizar Veículo\n";
-        std::cout << "4 - Listar Veículos\n";
-        std::cout << "5 - Backup de dados\n";
-        std::cout << "6 - Restaurar dados\n";
-        std::cout << "0 - Sair\n";
-        std::cout << "Escolha uma opção: ";
-        std::cin >> opcao;
+        cout << "===== MENU PRINCIPAL =====" << endl;
+        cout << "1 - Menu Locais" << endl;
+        cout << "2 - Menu Veículos" << endl;
+        cout << "3 - Menu Pedidos" << endl;
+        cout << "4 - Sair" << endl;
+        cout << "Escolha uma opção: ";
+        cin >> opt;
 
-        switch (opcao) {
-            case 1: AdicionarVeiculo(veiculos); break;
-            case 2: RemoverVeiculo(veiculos); break;
-            case 3: AtualizarVeiculo(veiculos); break;
-            case 4: ListarVeiculos(veiculos); break;
-            case 5: SalvarEmArquivo(veiculos); break;
-            case 6: RestaurarDeArquivo(veiculos); break;
-            case 0: std::cout << "Saindo...\n"; break;
-            default: std::cout << "Opção inválida.\n";
+        switch(opt) {
+            case 1:
+                cout << "Você escolheu o Menu Locais." << endl;
+                menuLocais(locais);
+                break;
+            case 2:
+                menuVeiculos(veiculos);
+                break;
+            case 3:
+                cout << "Você escolheu o Menu Pedidos." << endl;
+                //menuPedidos(pedidos)
+                break;
+            case 4:
+                cout << "Saindo do programa..." << endl;
+                break;
+            default:
+                cout << "Opção inválida! Tente novamente." << endl;
         }
-    } while (opcao != 0);
+        cout << endl;
+    } while(opt != 4);
 
     return 0;
 }

@@ -1,14 +1,17 @@
 #ifndef VEICULOSERVICE_H
 #define VEICULOSERVICE_H
 
-#include "../Models/Veiculo.h"
+#include "../Models/Veiculomodel.h"
 #include <vector>
 
-void AdicionarVeiculo(std::vector<Veiculo>& veiculos);
-void RemoverVeiculo(std::vector<Veiculo>& veiculos);
-void AtualizarVeiculo(std::vector<Veiculo>& veiculos);
-void ListarVeiculos(const std::vector<Veiculo>& veiculos);
-void SalvarEmArquivo(const std::vector<Veiculo>& veiculos);
-void RestaurarDeArquivo(std::vector<Veiculo>& veiculos);
+using namespace std;
+
+void AdicionarVeiculo(vector<Veiculo>& veiculos);
+void RemoverVeiculo(vector<Veiculo>& veiculos);
+void AtualizarVeiculo(vector<Veiculo>& veiculos);
+void ListarVeiculos(const vector<Veiculo>& veiculos);
+void SalvarEmArquivo(const vector<Veiculo>& veiculos);
+void RestaurarDeArquivo(vector<Veiculo>& veiculos);
+void menuVeiculos(std::vector<Veiculo>& veiculos);
 
 #endif
