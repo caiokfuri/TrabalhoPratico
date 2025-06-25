@@ -9,7 +9,7 @@
 #include <cstring>
 #include <cstdio>
 
-
+using namespace std;
 
 
 #endif
