@@ -4,19 +4,19 @@
 
 using namespace std;
 
-PedidoModel::PedidoModel() {
+Pedido::Pedido() {
     pedidoId = 0;
     peso = 0;
 }
 
-PedidoModel::PedidoModel(int pedidoId, Local origem, Local destino, double peso) {
+Pedido::Pedido(int pedidoId, Local origem, Local destino, double peso) {
    this->pedidoId = pedidoId;
    this->localOrigem = origem;
    this->localDestino = destino;
    this->peso = peso;
 }
 
- void PedidoModel::preencher() {
+ void Pedido::preencher() {
         cout << "ID do Pedido: ";
         cin >> pedidoId;
         cout << "--- Local de Origem ---\n";
@@ -27,7 +27,7 @@ PedidoModel::PedidoModel(int pedidoId, Local origem, Local destino, double peso)
         cin >> peso;
 }
 
-void PedidoModel::mostrar() const {
+void Pedido::mostrar() const {
         cout << "\nPedido ID: " << pedidoId << endl;
         cout << "Origem:\n";
         localOrigem.mostrar();

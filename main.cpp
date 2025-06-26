@@ -11,7 +11,7 @@ int main() {
     int opt = 0;
     vector<Veiculo> veiculos;
     vector<Local> locais;
-    vector<PedidoModel> pedidos;
+    vector<Pedido> pedidos;
     // vector<pedido> pedidos;
 
     do {

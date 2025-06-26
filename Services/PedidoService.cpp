@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void menuLocais(vector<PedidoModel>& pedidos) {
+void menuLocais(vector<Pedido>& pedidos) {
     int opcao;
     do {
         cout << "\n==== MENU PEDIDOS ====\n";
@@ -26,14 +26,14 @@ void menuLocais(vector<PedidoModel>& pedidos) {
     } while (opcao != 0);
 }
 
-void AdicionarPedido(vector<PedidoModel>& pedidos) {
-    PedidoModel pedido;
+void AdicionarPedido(vector<Pedido>& pedidos) {
+    Pedido pedido;
     pedido.preencher();
     pedidos.push_back(pedido);
     cout << "Pedido adicionado com sucesso!\n";
 }
 
-void RemoverPedido(vector<PedidoModel>& pedidos) {
+void RemoverPedido(vector<Pedido>& pedidos) {
     if (pedidos.empty()) {
         cout << "Nenhum Pedido cadastrado.\n";
         return;
@@ -59,7 +59,7 @@ void RemoverPedido(vector<PedidoModel>& pedidos) {
 }
 
 
-void AtualizarPedido(vector<PedidoModel>& pedidos) {
+void AtualizarPedido(vector<Pedido>& pedidos) {
     if (pedidos.empty()) {
         cout << "Nenhum Pedido cadastrado.\n";
         return;
@@ -86,7 +86,7 @@ void AtualizarPedido(vector<PedidoModel>& pedidos) {
 }
 
 
-void ListarPedidos(const vector<PedidoModel>& pedidos) {
+void ListarPedidos(const vector<Pedido>& pedidos) {
     if (pedidos.empty()) {
         cout << "Nenhum pedido cadastrado.\n";
         return;

@@ -7,10 +7,10 @@
 
 using namespace std;
 
-void menuPedidos(vector<PedidoModel>& pedidos);
-void AdicionarPedido(vector<PedidoModel>& pedidos);
-void RemoverPedido(vector<PedidoModel>& pedidos);
-void AtualizarPedido(vector<PedidoModel>& pedidos);
-void ListarPedidos(const vector<PedidoModel>& pedidos);
+void menuPedidos(vector<Pedido>& pedidos);
+void AdicionarPedido(vector<Pedido>& pedidos);
+void RemoverPedido(vector<Pedido>& pedidos);
+void AtualizarPedido(vector<Pedido>& pedidos);
+void ListarPedidos(const vector<Pedido>& pedidos);
 
 #endif
