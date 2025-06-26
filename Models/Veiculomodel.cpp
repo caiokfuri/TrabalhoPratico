@@ -9,17 +9,17 @@ Veiculo::Veiculo() {
     status = 0;
 }
 
-Veiculo::Veiculo(const char placa[8], const char modelo[20], const char localAtual[30], int status) : status(status) {
+Veiculo::Veiculo(const char placa[8], const char modelo[15], const char localAtual[50], int status) : status(status) {
     int i = 0;
     for (; i < 7 && placa[i] != '\0'; ++i) this->placa[i] = placa[i];
     this->placa[i] = '\0';
 
     i = 0;
-    for (; i < 19 && modelo[i] != '\0'; ++i) this->modelo[i] = modelo[i];
+    for (; i < 14 && modelo[i] != '\0'; ++i) this->modelo[i] = modelo[i];
     this->modelo[i] = '\0';
 
     i = 0;
-    for (; i < 29 && localAtual[i] != '\0'; ++i) this->localAtual[i] = localAtual[i];
+    for (; i < 49 && localAtual[i] != '\0'; ++i) this->localAtual[i] = localAtual[i];
     this->localAtual[i] = '\0';
 }
 
@@ -44,7 +44,7 @@ void Veiculo::setStatus(int novoStatus) { status = novoStatus; }
 
 void Veiculo::setLocalAtual(const char* novoLocal) {
     int i = 0;
-    for (; i < 29 && novoLocal[i] != '\0'; ++i) localAtual[i] = novoLocal[i];
+    for (; i < 49 && novoLocal[i] != '\0'; ++i) localAtual[i] = novoLocal[i];
     localAtual[i] = '\0';
 }
 

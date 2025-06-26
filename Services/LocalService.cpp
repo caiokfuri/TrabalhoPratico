@@ -6,11 +6,13 @@ using namespace std;
 void menuLocais(vector<Local>& locais) {
     int opcao;
     do {
-        cout << "\n==== MENU LOCAIS ====\n";
+        cout << "\n--- MENU LOCAIS ---\n";
         cout << "1 - Adicionar Local\n";
         cout << "2 - Remover Local\n";
         cout << "3 - Atualizar Local\n";
         cout << "4 - Listar Locais\n";
+        cout << "5 - Backup de dados";
+        cout << "6 - Restaurar dados";
         cout << "0 - Voltar\n";
         cout << "Escolha uma opção: ";
         cin >> opcao;
@@ -20,6 +22,8 @@ void menuLocais(vector<Local>& locais) {
             case 2: RemoverLocal(locais); break;
             case 3: AtualizarLocal(locais); break;
             case 4: ListarLocais(locais); break;
+            case 5: /*backupDados() */ ; break;
+            case 6: /*restaurarDado()*/ ; break;
             case 0: cout << "Voltando...\n"; break;
             default: cout << "Opção inválida.\n";
         }

@@ -90,7 +90,7 @@ void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
 void menuVeiculos(vector<Veiculo>& veiculos) {
     int opcao;
     do {
-        cout << "\n==== MENU VEÍCULOS ====\n";
+        cout << "\n--- MENU VEÍCULOS ---\n";
         cout << "1 - Adicionar Veículo\n";
         cout << "2 - Remover Veículo\n";
         cout << "3 - Atualizar Veículo\n";

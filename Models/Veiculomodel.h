@@ -8,13 +8,13 @@
 class Veiculo {
 private:
     char placa[8];
-    char modelo[20];
+    char modelo[15];
     int status;
-    char localAtual[30];
+    char localAtual[50];
 
 public:
     Veiculo();
-    Veiculo(const char placa[8], const char modelo[20], const char localAtual[30], int status = 0);
+    Veiculo(const char placa[8], const char modelo[15], const char localAtual[50], int status = 0);
 
     void preencher();
     void mostrar() const;
