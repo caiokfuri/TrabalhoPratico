@@ -6,16 +6,16 @@ using namespace std;
 
 void AdicionarVeiculo(vector<Veiculo>& veiculos) {
     Veiculo v;
-    v.preencher();
+    v.entrada();
     veiculos.push_back(v);
-    cout << "Veículo adicionado com sucesso!\n";
+    cout << "Veiculo adicionado com sucesso!\n";
 }
 
 void RemoverVeiculo(vector<Veiculo>& veiculos) {
     ListarVeiculos(veiculos);
     if (veiculos.empty()) return;
 
-    cout << "Digite o índice para remover: ";
+    cout << "Digite o indice para remover: ";
     int i;
     cin >> i;
 
@@ -23,34 +23,86 @@ void RemoverVeiculo(vector<Veiculo>& veiculos) {
         veiculos.erase(veiculos.begin() + i);
         cout << "Removido com sucesso.\n";
     } else {
-        cout << "Índice inválido.\n";
+        cout << "Indice invalido.\n";
     }
 }
 
 void AtualizarVeiculo(vector<Veiculo>& veiculos) {
-    ListarVeiculos(veiculos);
-    if (veiculos.empty()) return;
+    if (veiculos.empty()) {
+        cout << "Nenhum veiculo cadastrado.\n";
+        return;
+    }
 
-    cout << "Digite o índice para atualizar: ";
+    ListarVeiculos(veiculos);
+
+    cout << "Digite o indice do veiculo que deseja atualizar: ";
     int i;
     cin >> i;
 
-    if (i >= 0 && i < veiculos.size()) {
-        veiculos[i].preencher();
-        cout << "Atualizado com sucesso.\n";
-    } else {
-        cout << "Índice inválido.\n";
+    if (i < 0 || i >= veiculos.size()) {
+        cout << "Indice invalido.\n";
+        return;
     }
+
+    int opcao;
+    do {
+        cout << "\nO que deseja alterar?\n";
+        cout << "1 - Placa\n";
+        cout << "2 - Modelo\n";
+        cout << "3 - Status\n";
+        cout << "4 - Local Atual\n";
+        cout << "0 - Sair\n";
+        cout << "Escolha uma opcao: ";
+        cin >> opcao;
+        cin.ignore();
+
+        switch (opcao) {
+            case 1: {
+                cout << "Nova placa: ";
+                // FAZER SET PLACA
+                cout << "Placa atualizada!\n";
+                break;
+            }
+            case 2: {
+                cout << "Novo modelo: ";
+                //FAZER SET MODELO
+                cout << "Modelo atualizado!\n";
+                break;
+            }
+            case 3: {
+                cout << "Novo status (0 - Disponivel, 1 - Ocupado): ";
+                int novoStatus;
+                cin >> novoStatus;
+                veiculos[i].setStatus(novoStatus);
+                cout << "Status atualizado!\n";
+                break;
+            }
+            case 4: {
+                cout << "Novo local atual: ";
+                char novoLocal[50];
+                cin.ignore();
+                cin.getline(novoLocal, 50);
+                veiculos[i].setLocalAtual(novoLocal);
+                cout << "Local atual atualizado!\n";
+                break;
+            }
+            case 0:
+                cout << "Saindo da atualizacao.\n";
+                break;
+            default:
+                cout << "Opcao invalida.\n";
+        }
+    } while (opcao != 0);
 }
 
 void ListarVeiculos(const vector<Veiculo>& veiculos) {
     if (veiculos.empty()) {
-        cout << "Nenhum veículo cadastrado.\n";
+        cout << "Nenhum veiculo cadastrado.\n";
         return;
     }
 
     for (int i = 0; i < veiculos.size(); i++) {
-        cout << "\n[Índice " << i << "]\n";
+        cout << "\n[Indice " << i << "]\n";
         veiculos[i].mostrar();
     }
 }
@@ -90,26 +142,41 @@ void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
 void menuVeiculos(vector<Veiculo>& veiculos) {
     int opcao;
     do {
-        cout << "\n--- MENU VEÍCULOS ---\n";
-        cout << "1 - Adicionar Veículo\n";
-        cout << "2 - Remover Veículo\n";
-        cout << "3 - Atualizar Veículo\n";
-        cout << "4 - Listar Veículos\n";
+        cout << "\n--- MENU VEICULOS ---\n";
+        cout << "1 - Adicionar Veiculo\n";
+        cout << "2 - Remover Veiculo\n";
+        cout << "3 - Atualizar Veiculo\n";
+        cout << "4 - Listar Veiculos\n";
         cout << "5 - Backup de dados\n";
         cout << "6 - Restaurar dados\n";
         cout << "0 - Voltar\n";
-        cout << "Escolha uma opção: ";
+        cout << "Escolha uma opcao: ";
         cin >> opcao;
 
         switch (opcao) {
-            case 1: AdicionarVeiculo(veiculos); break;
-            case 2: RemoverVeiculo(veiculos); break;
-            case 3: AtualizarVeiculo(veiculos); break;
-            case 4: ListarVeiculos(veiculos); break;
-            case 5: SalvarEmArquivo(veiculos); break;
-            case 6: RestaurarDeArquivo(veiculos); break;
-            case 0: cout << "Voltando ao menu principal...\n"; break;
-            default: cout << "Opção inválida.\n";
+            case 1: 
+                AdicionarVeiculo(veiculos); 
+                break;
+            case 2: 
+                RemoverVeiculo(veiculos); 
+                break;
+            case 3: 
+                AtualizarVeiculo(veiculos); 
+                break;
+            case 4: 
+                ListarVeiculos(veiculos); 
+                break;
+            case 5: 
+                SalvarEmArquivo(veiculos); 
+                break;
+            case 6: 
+                RestaurarDeArquivo(veiculos); 
+                break;
+            case 0: 
+                cout << "Voltando ao menu principal...\n"; 
+                break;
+            default: 
+                cout << "Opcao invalida.\n";
         }
     } while (opcao != 0);
 }

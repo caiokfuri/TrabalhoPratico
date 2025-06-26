@@ -9,7 +9,7 @@ private:
 public:
     Local();
     Local(const char nome[50], double x, double y);
-    void preencher();
+    void entrada();
     void mostrar() const;
     void setNome(const char* novoNome);
     void setX(double novoX);

@@ -1,6 +1,6 @@
 #ifndef PEDIDOMODEL_H
 #define PEDIDOMODEL_H
-#include "Models/Localmodel.h"
+#include "LocalModel.h"
 
 class Pedido {
 private:
@@ -11,12 +11,13 @@ private:
 public:
     Pedido();
     Pedido(int pedidoId, Local origem, Local destino, double peso);
-    void preencher();
+    void entrada();
     void mostrar() const;
 
     int getId() const;
     Local& getLocalOrigem();
     Local& getLocalDestino();
+    
 };
 
 #endif

@@ -1,4 +1,4 @@
-#include "Veiculomodel.h"
+#include "VeiculoModel.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ Veiculo::Veiculo(const char placa[8], const char modelo[15], const char localAtu
     this->localAtual[i] = '\0';
 }
 
-void Veiculo::preencher() {
+void Veiculo::entrada() {
     cout << "Placa (7 chars): ";
     cin >> placa;
     cout << "Modelo: ";
@@ -36,7 +36,7 @@ void Veiculo::preencher() {
 void Veiculo::mostrar() const {
     cout << "Placa: " << placa
          << "\nModelo: " << modelo
-         << "\nStatus: " << (status == 0 ? "Disponível" : "Ocupado")
+         << "\nStatus: " << (status == 0 ? "Disponivel" : "Ocupado")
          << "\nLocal Atual: " << localAtual << "\n";
 }
 

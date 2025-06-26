@@ -4,7 +4,7 @@
 #define CABECA_H
 
 #include <iostream>
-#include <locale.h>
+#include <locale>
 #include <vector>
 #include <cstring>
 #include <cstdio>

@@ -16,13 +16,13 @@ Pedido::Pedido(int pedidoId, Local origem, Local destino, double peso) {
    this->peso = peso;
 }
 
- void Pedido::preencher() {
+ void Pedido::entrada() {
         cout << "ID do Pedido: ";
         cin >> pedidoId;
         cout << "--- Local de Origem ---\n";
-        localOrigem.preencher();
+        localOrigem.entrada();
         cout << "--- Local de Destino ---\n";
-        localDestino.preencher();
+        localDestino.entrada();
         cout << "Peso: ";
         cin >> peso;
 }
@@ -34,4 +34,16 @@ void Pedido::mostrar() const {
         cout << "Destino:\n";
         localDestino.mostrar();
         cout << "Peso: " << peso << " kg\n";
+}
+
+int Pedido::getId() const {
+    return pedidoId;
+}
+
+Local& Pedido::getLocalOrigem() {
+    return localOrigem;
+}
+
+Local& Pedido::getLocalDestino() {
+    return localDestino;
 }

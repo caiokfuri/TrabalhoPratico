@@ -16,7 +16,7 @@ public:
     Veiculo();
     Veiculo(const char placa[8], const char modelo[15], const char localAtual[50], int status = 0);
 
-    void preencher();
+    void entrada();
     void mostrar() const;
 
     void setStatus(int novoStatus);

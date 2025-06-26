@@ -2,12 +2,13 @@
 #include "Services/VeiculoService.h"
 #include "Services/LocalService.h"
 #include "Services/PedidoService.h"
+#include <locale>
 
 
 using namespace std;
 
 int main() {
-    setlocale(LC_ALL, "Portuguese");
+    // setlocale(LC_ALL, "Portuguese_Brazil");
     int opt = 0;
     vector<Veiculo> veiculos;
     vector<Local> locais;
@@ -19,7 +20,7 @@ int main() {
         cout << "1 - Menu Locais" << endl;
         cout << "2 - Menu Veículos" << endl;
         cout << "3 - Menu Pedidos" << endl;
-        cout << "4 - Visualizar rota de entrega";
+        cout << "4 - Visualizar rota de entrega" << endl;
         cout << "5 - Sair" << endl;
         cout << "Escolha uma opção: ";
         cin >> opt;
@@ -30,11 +31,11 @@ int main() {
                 menuLocais(locais);
                 break;
             case 2:
-            cout << "Menu Veículos";
+            cout << "Menu Veiculos" << endl;
                 menuVeiculos(veiculos);
                 break;
             case 3:
-                cout << "Você escolheu o Menu Pedidos." << endl;
+                cout << "Voce escolheu o Menu Pedidos." << endl;
                 menuPedidos(pedidos);
                 break;
             case 4:
@@ -44,10 +45,10 @@ int main() {
                 cout << "Saindo do programa..." << endl;
                 break;
             default:
-                cout << "Opção inválida! Tente novamente." << endl;
+                cout << "Opcao invalida! Tente novamente." << endl;
         }
         cout << endl;
-    } while(opt != 4);
+    } while(opt != 5);
 
     return 0;
 }

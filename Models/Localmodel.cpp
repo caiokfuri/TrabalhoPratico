@@ -1,4 +1,4 @@
-#include "Localmodel.h"
+#include "LocalModel.h"
 #include <iostream>
 #include <cstring>
 
@@ -18,7 +18,7 @@ Local::Local(const char nome[50], double x, double y) : x(x), y(y) {
     this->nome[i] = '\0';
 }
 
-void Local::preencher() {
+void Local::entrada() {
     cout << "Nome do local: ";
     cin.ignore();
     cin.getline(nome, 50);

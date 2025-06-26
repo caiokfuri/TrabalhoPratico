@@ -1,7 +1,7 @@
 #ifndef LOCALSERVICE_H
 #define LOCALSERVICE_H
 
-#include "../Models/Localmodel.h"
+#include "../Models/LocalModel.h"
 #include <vector>
 #include <cstring>
 
