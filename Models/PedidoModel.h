@@ -11,8 +11,8 @@ private:
     double peso;
 public:
     Pedido() {
-        int pedidoId = 0;
-        double peso = 0;
+        pedidoId = 0;
+        peso = 0;
     }
     Pedido(int pedidoId, Local origem, Local destino, double peso) {
         this->pedidoId = pedidoId;

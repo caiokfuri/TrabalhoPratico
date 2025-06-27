@@ -7,8 +7,7 @@ using namespace std;
 class Local {
 private:
     string nome;
-    double x;
-    double y;
+    double x, y;
 public:
     Local() {
         nome = "";
