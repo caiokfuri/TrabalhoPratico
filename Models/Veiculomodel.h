@@ -27,7 +27,12 @@ public:
     void mostrar() const;
 
   
-   
+    void setPlaca(const string& novaPlaca);
+    void setModelo(const string& novoModelo);
+    void setStatus(int novoStatus);
+    void setLocalAtual(const string& novoLocal);
+
+ 
     const string& getPlaca() const;
     const string& getModelo() const;
     const string& getLocalAtual() const;
