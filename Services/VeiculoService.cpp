@@ -99,14 +99,14 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
         cout << "Escolha uma opção: ";
         cin >> opcao;
 
-        cin.ignore(); // limpar o buffer antes de getline
+        cin.ignore();
 
         switch (opcao) {
             case 1: {
                 cout << "Nova placa: ";
                 char novaPlaca[8];
                 cin.getline(novaPlaca, 8);
-                veiculos[i].setPlaca(novaPlaca); // ✅ IMPLEMENTADO
+                veiculos[i].setPlaca(novaPlaca); 
                 cout << "Placa atualizada!\n";
                 break;
             }
@@ -114,7 +114,7 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
                 cout << "Novo modelo: ";
                 char novoModelo[50];
                 cin.getline(novoModelo, 50);
-                veiculos[i].setModelo(novoModelo); // ✅ IMPLEMENTADO
+                veiculos[i].setModelo(novoModelo); 
                 cout << "Modelo atualizado!\n";
                 break;
             }

@@ -1,6 +1,5 @@
-#include "../munit/munit.h"
 #include "../Models/Veiculomodel.h"
-#include <cstring>
+
 extern "C" {
     #include "../Munit/munit.h"
 }
@@ -15,7 +14,7 @@ static MunitResult test_set_e_get_status(const MunitParameter[], void*) {
 static MunitResult test_set_e_get_localAtual(const MunitParameter[], void*) {
     Veiculo v;
     v.setLocalAtual("Garagem");
-    munit_assert_string_equal(v.getLocalAtual(), "Garagem");
+    munit_assert_string_equal(v.getLocalAtual().c_str(), "Garagem");
     return MUNIT_OK;
 }
 
