@@ -19,15 +19,15 @@ public:
         localAtual = "";
         status = 0;
     }
-    Veiculo(const string& placa, const string& modelo, const string& localAtual, int status) : placa(placa), modelo(modelo), localAtual(localAtual), status(status) {
-    }
+
+    Veiculo(const string& placa, const string& modelo, const string& localAtual, int status)
+        : placa(placa), modelo(modelo), localAtual(localAtual), status(status) {}
 
     void entrada();
     void mostrar() const;
 
-    void setStatus(int novoStatus);
-    void setLocalAtual(const string& novoLocal);
-
+  
+   
     const string& getPlaca() const;
     const string& getModelo() const;
     const string& getLocalAtual() const;
