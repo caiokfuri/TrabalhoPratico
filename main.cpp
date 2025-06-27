@@ -26,15 +26,12 @@ int main() {
 
         switch(opt) {
             case 1:
-                cout << "Menu locais" << endl;
                 menuLocais(locais);
                 break;
             case 2:
-            cout << "Menu Veiculos" << endl;
                 menuVeiculos(veiculos);
                 break;
             case 3:
-                cout << "Voce escolheu o Menu Pedidos." << endl;
                 menuPedidos(pedidos);
                 break;
             case 4:
@@ -44,7 +41,7 @@ int main() {
                 cout << "Saindo do programa..." << endl;
                 break;
             default:
-                cout << "Opcao invalida! Tente novamente." << endl;
+                cout << "Opção inválida! Tente novamente." << endl;
         }
         cout << endl;
     } while(opt != 5);

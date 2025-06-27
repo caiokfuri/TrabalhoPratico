@@ -19,13 +19,13 @@ static MunitResult test_set_e_get_localAtual(const MunitParameter[], void*) {
 }
 
 static MunitTest tests[] = {
-    {(char*)"/veiculo/status", test_set_e_get_status, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL},
-    {(char*)"/veiculo/localAtual", test_set_e_get_localAtual, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL},
+    {"/veiculo/status", test_set_e_get_status, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL},
+    {"/veiculo/localAtual", test_set_e_get_localAtual, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL},
     {NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL}
 };
 
 static const MunitSuite suite = {
-    (char*)"/slem-tests", tests, NULL, 1, MUNIT_SUITE_OPTION_NONE
+    "/slem-tests", tests, NULL, 1, MUNIT_SUITE_OPTION_NONE
 };
 
 int main(int argc, char* argv[]) {
