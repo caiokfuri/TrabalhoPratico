@@ -2,13 +2,12 @@
 #include "Services/VeiculoService.h"
 #include "Services/LocalService.h"
 #include "Services/PedidoService.h"
-#include <locale>
 
 
 using namespace std;
 
 int main() {
-    // setlocale(LC_ALL, "Portuguese_Brazil");
+    SetConsoleOutputCP(CP_UTF8);
     int opt = 0;
     vector<Veiculo> veiculos;
     vector<Local> locais;
