@@ -3,16 +3,50 @@
 
 using namespace std;
 
+
+void Pedido::entrada() {
+    cout << "ID do Pedido: ";
+    cin >> pedidoId;
+    cout << "--- Local de Origem ---" << endl;
+    localOrigem.entrada();
+    cout << "--- Local de Destino ---" << endl;
+    localDestino.entrada();
+    cout << "Peso: ";
+    cin >> peso;
+}
+
+void Pedido::mostrar() const {
+    cout << "\nPedido ID: " << pedidoId << endl;
+    cout << "Origem:" << endl;
+    localOrigem.mostrar();
+    cout << "Destino:" << endl;
+    localDestino.mostrar();
+    cout << "Peso: " << peso << " kg" << endl;
+}
+
+int Pedido::getId() const {
+    return pedidoId;
+}
+
+Local& Pedido::getLocalOrigem() {
+    return localOrigem;
+}
+
+Local& Pedido::getLocalDestino() {
+    return localDestino;
+}
+
+
 void menuPedidos(vector<Pedido>& pedidos) {
     int opcao;
     do {
         cout << "\n--- MENU PEDIDOS ---\n";
-        cout << "1 - Adicionar Pedido\n";
-        cout << "2 - Remover Pedido\n";
-        cout << "3 - Atualizar Pedido\n";
-        cout << "4 - Listar Pedidos\n";
-        cout << "0 - Voltar\n";
-        cout << "Escolha uma opcao: ";
+        cout << "1 - Adicionar Pedido" << endl;
+        cout << "2 - Remover Pedido" << endl;
+        cout << "3 - Atualizar Pedido" << endl;
+        cout << "4 - Listar Pedidos" << endl;
+        cout << "0 - Voltar" << endl;
+        cout << "Escolha uma opção: ";
         cin >> opcao;
 
         switch (opcao) {
@@ -32,7 +66,7 @@ void menuPedidos(vector<Pedido>& pedidos) {
                 cout << "Voltando...\n"; 
                 break;
             default: 
-                cout << "Opcao invalida.\n";
+                cout << "Opção inválida.\n";
         }
     } while (opcao != 0);
 }
@@ -65,7 +99,7 @@ void RemoverPedido(vector<Pedido>& pedidos) {
     }
 
     if (!removido) {
-        cout << "Pedido com ID " << idBusca << " nao encontrado.\n";
+        cout << "Pedido com ID " << idBusca << " não encontrado.\n";
     }
 }
 

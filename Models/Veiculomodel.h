@@ -2,29 +2,35 @@
 #define VEICULOMODEL_H
 
 #include <iostream>
-#include <cstring>
-#include <cstdio>
+#include <string>
+using namespace std;
 
 class Veiculo {
 private:
-    char placa[8];
-    char modelo[15];
+    string placa;
+    string modelo;
     int status;
-    char localAtual[50];
+    string localAtual;
 
 public:
-    Veiculo();
-    Veiculo(const char placa[8], const char modelo[15], const char localAtual[50], int status = 0);
+    Veiculo() {
+        placa = "";
+        modelo = "";
+        localAtual = "";
+        status = 0;
+    }
+    Veiculo(const string& placa, const string& modelo, const string& localAtual, int status) : placa(placa), modelo(modelo), localAtual(localAtual), status(status) {
+    }
 
     void entrada();
     void mostrar() const;
 
     void setStatus(int novoStatus);
-    void setLocalAtual(const char* novoLocal);
+    void setLocalAtual(const string& novoLocal);
 
-    const char* getPlaca() const;
-    const char* getModelo() const;
-    const char* getLocalAtual() const;
+    const string& getPlaca() const;
+    const string& getModelo() const;
+    const string& getLocalAtual() const;
     int getStatus() const;
 
     void salvar(FILE* file) const;

@@ -1,20 +1,29 @@
 #ifndef LOCALMODEL_H
 #define LOCALMODEL_H
+#include <string>
+
+using namespace std;
 
 class Local {
 private:
-    char nome[50];
+    string nome;
     double x;
     double y;
 public:
-    Local();
-    Local(const char nome[50], double x, double y);
+    Local() {
+        nome = "";
+        x = 0;
+        y = 0;
+    }
+
+    Local(const string& nome, double x, double y) : nome(nome), x(x), y(y) {}
+
     void entrada();
     void mostrar() const;
-    void setNome(const char* novoNome);
+    void setNome(const string& novoNome);
     void setX(double novoX);
     void setY(double novoY);
-    const char* getNome() const;
+    string getNome() const;
     double getX() const;
     double getY() const;
 };

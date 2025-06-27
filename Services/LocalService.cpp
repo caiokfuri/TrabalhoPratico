@@ -3,6 +3,30 @@
 
 using namespace std;
 
+void Local::entrada() {
+    cout << "Nome do local: ";
+    cin.ignore();
+    cin >> nome;
+    cout << "Coordenada X: ";
+    cin >> x;
+    cout << "Coordenada Y: ";
+    cin >> y;
+}
+
+void Local::mostrar() const {
+    cout << "Nome: " << nome << "\nX: " << x << "\nY: " << y << endl;
+}
+
+void Local::setNome(const string& novoNome) {
+    nome = novoNome;
+}
+void Local::setX(double novoX) { x = novoX; }
+void Local::setY(double novoY) { y = novoY; }
+string Local::getNome() const { return nome; }
+double Local::getX() const { return x; }
+double Local::getY() const { return y; }
+
+
 void menuLocais(vector<Local>& locais) {
     int opcao;
     do {
@@ -59,12 +83,12 @@ void RemoverLocal(vector<Local>& locais) {
     }
     cout << "Digite o nome do local para remover: ";
     cin.ignore();
-    char nomeBusca[50];
-    cin.getline(nomeBusca, 50);
+    string nomeBusca;
+    getline(cin, nomeBusca);
 
     bool removido = false;
     for (int i = 0; i < locais.size(); i++) {
-        if (strcmp(locais[i].getNome(), nomeBusca) == 0) {
+        if (locais[i].getNome() == nomeBusca) {
             locais.erase(locais.begin() + i);
             cout << "Removido com sucesso.\n";
             removido = true;

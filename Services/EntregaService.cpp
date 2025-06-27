@@ -1,4 +1,4 @@
-#include "./cabecalhos.h"
+#include "../cabecalhos.h"
 #include <cmath>
 
 double calculoDistancia(double x1, double y1, double x2, double y2){

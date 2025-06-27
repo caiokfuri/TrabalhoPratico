@@ -1,9 +1,9 @@
 #ifndef LOCALSERVICE_H
 #define LOCALSERVICE_H
 
-#include "../Models/LocalModel.h"
+#include "../Models/Localmodel.h"
 #include <vector>
-#include <cstring>
+#include <string>
 
 using namespace std;
 
