@@ -2,6 +2,7 @@
 #include "Services/VeiculoService.h"
 #include "Services/LocalService.h"
 #include "Services/PedidoService.h"
+#include "Services/EntregaService.h"
 
 
 using namespace std;
@@ -12,6 +13,7 @@ int main() {
     vector<Veiculo> veiculos;
     vector<Local> locais;
     vector<Pedido> pedidos;
+
     // vector<pedido> pedidos;
 
     do {
@@ -26,19 +28,20 @@ int main() {
 
         switch(opt) {
             case 1:
-                system("clear");
+                system("cls");
                 menuLocais(locais);
                 break;
             case 2:
-                system("clear");
+                system("cls");
                 menuVeiculos(veiculos);
                 break;
             case 3:
-                system("clear");
+                system("cls");
                 menuPedidos(pedidos);
                 break;
             case 4:
-                system("clear");
+                system("cls");
+                processarEntrega(veiculos, locais, pedidos);
                 // Funçao de cálculo e mostrar rota de entrega, já atualizando os veiculos e locais
                 break;
             case 5:
