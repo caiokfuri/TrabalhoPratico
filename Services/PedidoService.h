@@ -3,7 +3,6 @@
 
 #include "../Models/PedidoModel.h"
 #include <vector>
-#include <cstring>
 
 using namespace std;
 

@@ -4,6 +4,7 @@
 #include "../Models/Localmodel.h"
 #include <vector>
 
+
 using namespace std;
 
 void menuLocais(vector<Local>& locais);

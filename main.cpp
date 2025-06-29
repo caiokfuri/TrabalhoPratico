@@ -26,18 +26,23 @@ int main() {
 
         switch(opt) {
             case 1:
+                system("clear");
                 menuLocais(locais);
                 break;
             case 2:
+                system("clear");
                 menuVeiculos(veiculos);
                 break;
             case 3:
+                system("clear");
                 menuPedidos(pedidos);
                 break;
             case 4:
+                system("clear");
                 // Funçao de cálculo e mostrar rota de entrega, já atualizando os veiculos e locais
                 break;
             case 5:
+                system("clear");
                 cout << "Saindo do programa..." << endl;
                 break;
             default:

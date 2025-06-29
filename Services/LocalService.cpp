@@ -1,6 +1,8 @@
 #include "LocalService.h"
 #include <iostream>
 
+
+
 using namespace std;
 
 void Local::entrada() {
@@ -26,6 +28,7 @@ double Local::getY() const { return y; }
 
 
 void menuLocais(vector<Local>& locais) {
+    system("cls");
     int opcao;
     do {
         cout << "\n--- MENU LOCAIS ---\n";
