@@ -24,8 +24,14 @@ public:
     void mostrar() const;
 
     int getId() const;
+    void setId(int id);
     Local& getLocalOrigem();
+    void setLocalOrigem(Local origem);
     Local& getLocalDestino();
+    void setLocalDestino(Local destino);
+    double getPeso() const;
+    void setPeso(double peso);
+
     
 };
 
