@@ -5,8 +5,7 @@
 
 #include <iostream>
 #include <vector>
-#include <cstring>
-#include <cstdio>
+#include <string>
 #include <windows.h>
 
 using namespace std;

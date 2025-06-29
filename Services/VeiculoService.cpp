@@ -104,16 +104,16 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
         switch (opcao) {
             case 1: {
                 cout << "Nova placa: ";
-                char novaPlaca[8];
-                cin.getline(novaPlaca, 8);
+                string novaPlaca;
+                getline(cin, novaPlaca);
                 veiculos[i].setPlaca(novaPlaca); 
                 cout << "Placa atualizada!\n";
                 break;
             }
             case 2: {
                 cout << "Novo modelo: ";
-                char novoModelo[50];
-                cin.getline(novoModelo, 50);
+                string novoModelo;
+                getline(cin, novoModelo);
                 veiculos[i].setModelo(novoModelo); 
                 cout << "Modelo atualizado!\n";
                 break;
@@ -128,8 +128,8 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
             }
             case 4: {
                 cout << "Novo local atual: ";
-                char novoLocal[50];
-                cin.getline(novoLocal, 50);
+                string novoLocal;
+                getline(cin, novoLocal);
                 veiculos[i].setLocalAtual(novoLocal);
                 cout << "Local atual atualizado!\n";
                 break;

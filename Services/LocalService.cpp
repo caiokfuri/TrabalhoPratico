@@ -43,13 +43,13 @@ void menuLocais(vector<Local>& locais) {
 
         switch (opcao) {
             case 1: 
-                AdicionarLocal(locais); 
+                AdicionarLocal(locais);
                 break;
             case 2: 
                 RemoverLocal(locais); 
                 break;
             case 3: 
-                AtualizarLocal(locais); 
+                AtualizarLocal(locais);
                 break;
             case 4: 
                 ListarLocais(locais); 
@@ -142,8 +142,8 @@ void AtualizarLocal(vector<Local>& locais) {
         switch (opcao) {
             case 1: {
                 cout << "Novo nome: ";
-                char novoNome[50];
-                cin.getline(novoNome, 50);
+                string novoNome;
+                getline(cin, novoNome);
                 locais[id].setNome(novoNome);
                 cout << "Nome atualizado!\n";
                 break;
