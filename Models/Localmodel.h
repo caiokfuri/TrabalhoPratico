@@ -9,6 +9,7 @@ private:
     string nome;
     double x, y;
 public:
+    //Construtores
     Local() {
         nome = "";
         x = 0;
@@ -17,14 +18,15 @@ public:
 
     Local(const string& nome, double x, double y) : nome(nome), x(x), y(y) {}
 
+    //Métodos
     void entrada();
     void mostrar() const;
-    void setNome(const string& novoNome);
-    void setX(double novoX);
-    void setY(double novoY);
     string getNome() const;
     double getX() const;
     double getY() const;
+    void setNome(const string& novoNome);
+    void setX(double novoX);
+    void setY(double novoY);
 };
 
 #endif

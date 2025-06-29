@@ -5,7 +5,7 @@
 using namespace std;
 
 void Veiculo::entrada() {
-    cout << "Placa (7 chars): ";
+    cout << "Placa: ";
     cin >> placa;
     cout << "Modelo: ";
     cin >> modelo;
@@ -59,7 +59,7 @@ void RemoverVeiculo(vector<Veiculo>& veiculos) {
     ListarVeiculos(veiculos);
     if (veiculos.empty()) return;
 
-    cout << "Digite o índice para remover: ";
+    cout << "Digite o ID para remover: ";
     int i;
     cin >> i;
 
@@ -67,7 +67,7 @@ void RemoverVeiculo(vector<Veiculo>& veiculos) {
         veiculos.erase(veiculos.begin() + i);
         cout << "Removido com sucesso.\n";
     } else {
-        cout << "Índice inválido.\n";
+        cout << "ID inválido.\n";
     }
 }
 
@@ -79,12 +79,12 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
 
     ListarVeiculos(veiculos);
 
-    cout << "Digite o índice do veículo que deseja atualizar: ";
+    cout << "Digite o ID do veículo que deseja atualizar: ";
     int i;
     cin >> i;
 
     if (i < 0 || i >= static_cast<int>(veiculos.size())) {
-        cout << "Índice inválido.\n";
+        cout << "ID inválido.\n";
         return;
     }
 
@@ -150,7 +150,7 @@ void ListarVeiculos(const vector<Veiculo>& veiculos) {
     }
 
     for (int i = 0; i < static_cast<int>(veiculos.size()); i++) {
-        cout << "\nVeículo " << i << "]\n";
+        cout << "\n[Veículo " << i + 1 << "]\n";
         veiculos[i].mostrar();
     }
 }
@@ -202,14 +202,29 @@ void menuVeiculos(vector<Veiculo>& veiculos) {
         cin >> opcao;
 
         switch (opcao) {
-            case 1: AdicionarVeiculo(veiculos); break;
-            case 2: RemoverVeiculo(veiculos); break;
-            case 3: AtualizarVeiculo(veiculos); break;
-            case 4: ListarVeiculos(veiculos); break;
-            case 5: SalvarEmArquivo(veiculos); break;
-            case 6: RestaurarDeArquivo(veiculos); break;
-            case 0: cout << "Voltando ao menu principal...\n"; break;
-            default: cout << "Opção inválida.\n";
+            case 1:
+                AdicionarVeiculo(veiculos);
+                break;
+            case 2:
+                RemoverVeiculo(veiculos);
+                break;
+            case 3:
+                AtualizarVeiculo(veiculos);
+                break;
+            case 4:
+                ListarVeiculos(veiculos);
+                break;
+            case 5:
+                SalvarEmArquivo(veiculos);
+                break;
+            case 6:
+                RestaurarDeArquivo(veiculos);
+                break;
+            case 0:
+                cout << "Voltando ao menu principal..." << endl;
+                break;
+            default:
+                cout << "Opção inválida.\n";
         }
     } while (opcao != 0);
 }
