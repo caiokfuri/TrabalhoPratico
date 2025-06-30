@@ -4,8 +4,7 @@
 #include <vector>
 using namespace std;
 
-// === Implementações da Classe Veiculo ===
-// Entrada de dados do veículo via teclado
+// Entrada de dados do veículo
 void Veiculo::entrada() {
     cout << "Placa (7 chars): ";
     cin >> placa;
@@ -13,10 +12,10 @@ void Veiculo::entrada() {
     cin >> modelo;
     cout << "Local Atual: ";
     cin >> localAtual;
-    status = 0; // status inicial é disponível
+    status = 0; // Disponível por padrão
 }
 
-// Exibição dos dados do veículo
+// Exibição dos dados
 void Veiculo::mostrar() const {
     cout << "Placa: " << placa
          << "\nModelo: " << modelo
@@ -24,31 +23,27 @@ void Veiculo::mostrar() const {
          << "\nLocal Atual: " << localAtual << "\n";
 }
 
-// Métodos setters
+// Setters e Getters
 void Veiculo::setStatus(int novoStatus) { status = novoStatus; }
 void Veiculo::setLocalAtual(const string& novoLocal) { localAtual = novoLocal; }
 void Veiculo::setPlaca(const string& novaPlaca) { placa = novaPlaca; }
 void Veiculo::setModelo(const string& novoModelo) { modelo = novoModelo; }
 
-// Métodos getters
 const string& Veiculo::getPlaca() const { return placa; }
 const string& Veiculo::getModelo() const { return modelo; }
 const string& Veiculo::getLocalAtual() const { return localAtual; }
 int Veiculo::getStatus() const { return status; }
 
-// === Funções de Backup e Restauração ===
-// Salva os dados binários do objeto no arquivo
+// Funções para salvar e carregar em arquivo
 void Veiculo::salvar(FILE* file) const {
-    fwrite(this, sizeof(Veiculo), 1, file); // ⚠️ cuidado: gravação de string pode falhar
+    fwrite(this, sizeof(Veiculo), 1, file);
 }
 
-// Carrega os dados do objeto a partir do arquivo
 bool Veiculo::carregar(FILE* file) {
-    return fread(this, sizeof(Veiculo), 1, file) == 1; // retorna true se carregado
+    return fread(this, sizeof(Veiculo), 1, file) == 1;
 }
 
-// === Funções de Manipulação de Veículos ===
-// Adiciona um novo veículo à lista
+// Funções de operação
 void AdicionarVeiculo(vector<Veiculo>& veiculos) {
     Veiculo v;
     v.entrada();
@@ -56,7 +51,6 @@ void AdicionarVeiculo(vector<Veiculo>& veiculos) {
     cout << "Veículo adicionado com sucesso!\n";
 }
 
-// Remove veículo por índice informado pelo usuário
 void RemoverVeiculo(vector<Veiculo>& veiculos) {
     ListarVeiculos(veiculos);
     if (veiculos.empty()) return;
@@ -80,7 +74,6 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
     }
 
     ListarVeiculos(veiculos);
-
     cout << "Digite o índice do veículo que deseja atualizar: ";
     int i;
     cin >> i;
@@ -100,21 +93,21 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
         cout << "0 - Sair\n";
         cout << "Escolha uma opção: ";
         cin >> opcao;
-        cin.ignore(); 
+        cin.ignore();
 
         switch (opcao) {
             case 1: {
                 cout << "Nova placa: ";
-                char novaPlaca[10];
-                cin.getline(novaPlaca, 10);
+                string novaPlaca;
+                getline(cin, novaPlaca);
                 veiculos[i].setPlaca(novaPlaca);
                 cout << "Placa atualizada!\n";
                 break;
             }
             case 2: {
                 cout << "Novo modelo: ";
-                char novoModelo[50];
-                cin.getline(novoModelo, 50);
+                string novoModelo;
+                getline(cin, novoModelo);
                 veiculos[i].setModelo(novoModelo);
                 cout << "Modelo atualizado!\n";
                 break;
@@ -129,9 +122,9 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
             }
             case 4: {
                 cout << "Novo local atual: ";
-                char novoLocal[50];
-                cin.ignore(); 
-                cin.getline(novoLocal, 50);
+                string novoLocal;
+                cin.ignore();
+                getline(cin, novoLocal);
                 veiculos[i].setLocalAtual(novoLocal);
                 cout << "Local atual atualizado!\n";
                 break;
@@ -145,7 +138,6 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
     } while (opcao != 0);
 }
 
-
 void ListarVeiculos(const vector<Veiculo>& veiculos) {
     if (veiculos.empty()) {
         cout << "Nenhum veículo cadastrado.\n";
@@ -157,7 +149,6 @@ void ListarVeiculos(const vector<Veiculo>& veiculos) {
         veiculos[i].mostrar();
     }
 }
-
 
 void SalvarEmArquivo(const vector<Veiculo>& veiculos) {
     FILE* file = fopen("veiculos.dat", "wb");
@@ -173,7 +164,6 @@ void SalvarEmArquivo(const vector<Veiculo>& veiculos) {
     cout << "Backup salvo em 'veiculos.dat'\n";
 }
 
-
 void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
     FILE* file = fopen("veiculos.dat", "rb");
     if (!file) {
@@ -183,7 +173,6 @@ void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
 
     veiculos.clear();
     Veiculo temp;
-
     while (temp.carregar(file)) {
         veiculos.push_back(temp);
     }
@@ -193,7 +182,6 @@ void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
 }
 
 void menuVeiculos(vector<Veiculo>& veiculos) {
-       vector<Veiculo> veiculos;
     int opcao;
     do {
         cout << "\n--- MENU VEÍCULOS ---\n";
