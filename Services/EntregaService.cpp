@@ -119,14 +119,38 @@ void processarEntrega(vector<Veiculo>& frota, vector<Local>& pontos, vector<Pedi
 
     double percursoTotal = distanciaColeta + distanciaPercurso;
 
-    // MOSTRAR ENTREGA ( BRUNO )
 
-    transportador->setStatus(1);
-    cout << "\nIniciando transporte" << endl;
-    Sleep(2000);
+    cout << "\nRota em andamento" << endl;
+    cout << "\nVeículo em trânsito:" << endl;
+    transportador->mostrar();
+    cout<< "\nLocal de origem:" << endl;
+    pedidos[posicaoPedido].getLocalOrigem().mostrar();
+    cout<< "\nLocal de Destino:" << endl;
+    pedidos[posicaoPedido].getLocalDestino().mostrar();
+    cout << "\nPercurso total:" << percursoTotal << endl;
 
-    transportador->setLocalAtual(pedidos[posicaoPedido].getLocalDestino().getNome());
-    transportador->setStatus(0);
-    cout << "Entrega concluída!" << endl;
-    cout << "Transportador disponível em: " << pedidos[posicaoPedido].getLocalDestino().getNome() << endl;
+    cout << "Deseja concluir a entrega? (S/N)" << endl;
+    char resp;
+    cin >> resp;
+
+    //Verificar posteriormente a questão da conclusão do pedido
+
+    if(resp == 'S' or resp == 's') {
+        cout << "\nIniciando transporte" << endl;
+        Sleep(2000);
+        transportador->setLocalAtual(pedidos[posicaoPedido].getLocalDestino().getNome());
+        transportador->setStatus(0);
+        cout << "Entrega concluída!" << endl;
+        cout << "Transportador disponível em: " << pedidos[posicaoPedido].getLocalDestino().getNome() << endl;
+    }
+
+
+    //transportador->setStatus(1);
+    //cout << "\nIniciando transporte" << endl;
+    //Sleep(2000);
+
+    //transportador->setLocalAtual(pedidos[posicaoPedido].getLocalDestino().getNome());
+    //transportador->setStatus(0);
+    //cout << "Entrega concluída!" << endl;
+    //cout << "Transportador disponível em: " << pedidos[posicaoPedido].getLocalDestino().getNome() << endl;
 }

@@ -1,19 +1,21 @@
 #include "VeiculoService.h"
 #include <iostream>
 #include <cstdio>
-
+#include <vector>
 using namespace std;
 
+// Entrada de dados do veículo
 void Veiculo::entrada() {
-    cout << "Placa: ";
+    cout << "Placa (7 chars): ";
     cin >> placa;
     cout << "Modelo: ";
     cin >> modelo;
     cout << "Local Atual: ";
     cin >> localAtual;
-    status = 0;
+    status = 0; // Disponível por padrão
 }
 
+// Exibição dos dados
 void Veiculo::mostrar() const {
     cout << "Placa: " << placa
          << "\nModelo: " << modelo
@@ -21,25 +23,18 @@ void Veiculo::mostrar() const {
          << "\nLocal Atual: " << localAtual << "\n";
 }
 
+// Setters e Getters
 void Veiculo::setStatus(int novoStatus) { status = novoStatus; }
-
-void Veiculo::setLocalAtual(const string& novoLocal) {
-    localAtual = novoLocal;
-}
-
-void Veiculo::setPlaca(const string& novaPlaca) {
-    placa = novaPlaca;
-}
-
-void Veiculo::setModelo(const string& novoModelo) {
-    modelo = novoModelo;
-}
+void Veiculo::setLocalAtual(const string& novoLocal) { localAtual = novoLocal; }
+void Veiculo::setPlaca(const string& novaPlaca) { placa = novaPlaca; }
+void Veiculo::setModelo(const string& novoModelo) { modelo = novoModelo; }
 
 const string& Veiculo::getPlaca() const { return placa; }
 const string& Veiculo::getModelo() const { return modelo; }
 const string& Veiculo::getLocalAtual() const { return localAtual; }
 int Veiculo::getStatus() const { return status; }
 
+// Funções para salvar e carregar em arquivo
 void Veiculo::salvar(FILE* file) const {
     fwrite(this, sizeof(Veiculo), 1, file);
 }
@@ -48,6 +43,7 @@ bool Veiculo::carregar(FILE* file) {
     return fread(this, sizeof(Veiculo), 1, file) == 1;
 }
 
+// Funções de operação
 void AdicionarVeiculo(vector<Veiculo>& veiculos) {
     Veiculo v;
     v.entrada();
@@ -59,15 +55,15 @@ void RemoverVeiculo(vector<Veiculo>& veiculos) {
     ListarVeiculos(veiculos);
     if (veiculos.empty()) return;
 
-    cout << "Digite o ID para remover: ";
+    cout << "Digite o índice para remover: ";
     int i;
     cin >> i;
 
-    if (i >= 0 && i < static_cast<int>(veiculos.size())) {
+    if (i >= 0 && i < veiculos.size()) {
         veiculos.erase(veiculos.begin() + i);
         cout << "Removido com sucesso.\n";
     } else {
-        cout << "ID inválido.\n";
+        cout << "Índice inválido.\n";
     }
 }
 
@@ -78,13 +74,12 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
     }
 
     ListarVeiculos(veiculos);
-
-    cout << "Digite o ID do veículo que deseja atualizar: ";
+    cout << "Digite o índice do veículo que deseja atualizar: ";
     int i;
     cin >> i;
 
-    if (i < 0 || i >= static_cast<int>(veiculos.size())) {
-        cout << "ID inválido.\n";
+    if (i < 0 || i >= veiculos.size()) {
+        cout << "Índice inválido.\n";
         return;
     }
 
@@ -98,7 +93,6 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
         cout << "0 - Sair\n";
         cout << "Escolha uma opção: ";
         cin >> opcao;
-
         cin.ignore();
 
         switch (opcao) {
@@ -106,7 +100,7 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
                 cout << "Nova placa: ";
                 string novaPlaca;
                 getline(cin, novaPlaca);
-                veiculos[i].setPlaca(novaPlaca); 
+                veiculos[i].setPlaca(novaPlaca);
                 cout << "Placa atualizada!\n";
                 break;
             }
@@ -114,7 +108,7 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
                 cout << "Novo modelo: ";
                 string novoModelo;
                 getline(cin, novoModelo);
-                veiculos[i].setModelo(novoModelo); 
+                veiculos[i].setModelo(novoModelo);
                 cout << "Modelo atualizado!\n";
                 break;
             }
@@ -129,13 +123,14 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
             case 4: {
                 cout << "Novo local atual: ";
                 string novoLocal;
+                cin.ignore();
                 getline(cin, novoLocal);
                 veiculos[i].setLocalAtual(novoLocal);
                 cout << "Local atual atualizado!\n";
                 break;
             }
             case 0:
-                cout << "Saindo da atualizacao.\n";
+                cout << "Saindo da atualização.\n";
                 break;
             default:
                 cout << "Opção inválida.\n";
@@ -149,8 +144,8 @@ void ListarVeiculos(const vector<Veiculo>& veiculos) {
         return;
     }
 
-    for (int i = 0; i < static_cast<int>(veiculos.size()); i++) {
-        cout << "\n[Veículo " << i + 1 << "]\n";
+    for (int i = 0; i < veiculos.size(); i++) {
+        cout << "\n[Veículo " << i << "]\n";
         veiculos[i].mostrar();
     }
 }
@@ -178,7 +173,6 @@ void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
 
     veiculos.clear();
     Veiculo temp;
-
     while (temp.carregar(file)) {
         veiculos.push_back(temp);
     }
@@ -190,7 +184,7 @@ void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
 void menuVeiculos(vector<Veiculo>& veiculos) {
     int opcao;
     do {
-        cout << "\n--- MENU VEICULOS ---\n";
+        cout << "\n--- MENU VEÍCULOS ---\n";
         cout << "1 - Adicionar Veículo\n";
         cout << "2 - Remover Veículo\n";
         cout << "3 - Atualizar Veículo\n";
@@ -202,29 +196,14 @@ void menuVeiculos(vector<Veiculo>& veiculos) {
         cin >> opcao;
 
         switch (opcao) {
-            case 1:
-                AdicionarVeiculo(veiculos);
-                break;
-            case 2:
-                RemoverVeiculo(veiculos);
-                break;
-            case 3:
-                AtualizarVeiculo(veiculos);
-                break;
-            case 4:
-                ListarVeiculos(veiculos);
-                break;
-            case 5:
-                SalvarEmArquivo(veiculos);
-                break;
-            case 6:
-                RestaurarDeArquivo(veiculos);
-                break;
-            case 0:
-                cout << "Voltando ao menu principal..." << endl;
-                break;
-            default:
-                cout << "Opção inválida.\n";
+            case 1: AdicionarVeiculo(veiculos); break;
+            case 2: RemoverVeiculo(veiculos); break;
+            case 3: AtualizarVeiculo(veiculos); break;
+            case 4: ListarVeiculos(veiculos); break;
+            case 5: SalvarEmArquivo(veiculos); break;
+            case 6: RestaurarDeArquivo(veiculos); break;
+            case 0: cout << "Voltando ao menu principal...\n"; break;
+            default: cout << "Opção inválida.\n";
         }
     } while (opcao != 0);
 }
