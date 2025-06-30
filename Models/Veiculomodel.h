@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class Veiculo {
@@ -13,33 +14,17 @@ private:
     string localAtual;
 
 public:
-    Veiculo() {
-        placa = "";
-        modelo = "";
-        localAtual = "";
-        status = 0;
-    }
-
-    Veiculo(const string& placa, const string& modelo, const string& localAtual, int status)
-<<<<<<< HEAD
-        : placa(placa), modelo(modelo), localAtual(localAtual), status(status) {
-    }
-=======
-        : placa(placa), modelo(modelo), localAtual(localAtual), status(status) {}
->>>>>>> ab7b754f3e7a01228ff1cb355c24aabbec1100d1
+    Veiculo();
+    Veiculo(const string& placa, const string& modelo, const string& localAtual, int status); 
 
     void entrada();
     void mostrar() const;
 
-  
     void setPlaca(const string& novaPlaca);
     void setModelo(const string& novoModelo);
     void setStatus(int novoStatus);
     void setLocalAtual(const string& novoLocal);
-    void setPlaca(const string& novaPlaca);      // <-- ADICIONADO
-    void setModelo(const string& novoModelo);    // <-- ADICIONADO
 
- 
     const string& getPlaca() const;
     const string& getModelo() const;
     const string& getLocalAtual() const;
