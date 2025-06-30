@@ -1,8 +1,10 @@
 #include "VeiculoService.h"
 #include <iostream>
 #include <cstdio>
-
+#include <vector>
 using namespace std;
+
+// === Implementações da Classe Veiculo ===
 
 void Veiculo::entrada() {
     cout << "Placa (7 chars): ";
@@ -22,19 +24,24 @@ void Veiculo::mostrar() const {
 }
 
 void Veiculo::setStatus(int novoStatus) { status = novoStatus; }
-
-void Veiculo::setLocalAtual(const string& novoLocal) {
-    localAtual = novoLocal;
-}
+void Veiculo::setLocalAtual(const string& novoLocal) { localAtual = novoLocal; }
+void Veiculo::setPlaca(const string& novaPlaca) { placa = novaPlaca; }
+void Veiculo::setModelo(const string& novoModelo) { modelo = novoModelo; }
 
 const string& Veiculo::getPlaca() const { return placa; }
 const string& Veiculo::getModelo() const { return modelo; }
 const string& Veiculo::getLocalAtual() const { return localAtual; }
 int Veiculo::getStatus() const { return status; }
 
-void Veiculo::salvar(FILE* file) const { fwrite(this, sizeof(Veiculo), 1, file); }
-bool Veiculo::carregar(FILE* file) { return fread(this, sizeof(Veiculo), 1, file) == 1; }
+void Veiculo::salvar(FILE* file) const {
+    fwrite(this, sizeof(Veiculo), 1, file);
+}
 
+bool Veiculo::carregar(FILE* file) {
+    return fread(this, sizeof(Veiculo), 1, file) == 1;
+}
+
+// === Funções de Manipulação de Veículos ===
 
 void AdicionarVeiculo(vector<Veiculo>& veiculos) {
     Veiculo v;
@@ -91,13 +98,17 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
         switch (opcao) {
             case 1: {
                 cout << "Nova placa: ";
-                // FAZER SET PLACA
+                char novaPlaca[10];
+                cin.getline(novaPlaca, 10);
+                veiculos[i].setPlaca(novaPlaca);
                 cout << "Placa atualizada!\n";
                 break;
             }
             case 2: {
                 cout << "Novo modelo: ";
-                //FAZER SET MODELO
+                char novoModelo[50];
+                cin.getline(novoModelo, 50);
+                veiculos[i].setModelo(novoModelo);
                 cout << "Modelo atualizado!\n";
                 break;
             }
@@ -119,7 +130,7 @@ void AtualizarVeiculo(vector<Veiculo>& veiculos) {
                 break;
             }
             case 0:
-                cout << "Saindo da atualizacao.\n";
+                cout << "Saindo da atualização.\n";
                 break;
             default:
                 cout << "Opção inválida.\n";
@@ -174,7 +185,7 @@ void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
 void menuVeiculos(vector<Veiculo>& veiculos) {
     int opcao;
     do {
-        cout << "\n--- MENU VEICULOS ---\n";
+        cout << "\n--- MENU VEÍCULOS ---\n";
         cout << "1 - Adicionar Veículo\n";
         cout << "2 - Remover Veículo\n";
         cout << "3 - Atualizar Veículo\n";
@@ -186,29 +197,14 @@ void menuVeiculos(vector<Veiculo>& veiculos) {
         cin >> opcao;
 
         switch (opcao) {
-            case 1: 
-                AdicionarVeiculo(veiculos); 
-                break;
-            case 2: 
-                RemoverVeiculo(veiculos); 
-                break;
-            case 3: 
-                AtualizarVeiculo(veiculos); 
-                break;
-            case 4: 
-                ListarVeiculos(veiculos); 
-                break;
-            case 5: 
-                SalvarEmArquivo(veiculos); 
-                break;
-            case 6: 
-                RestaurarDeArquivo(veiculos); 
-                break;
-            case 0: 
-                cout << "Voltando ao menu principal...\n"; 
-                break;
-            default: 
-                cout << "Opção inválida.\n";
+            case 1: AdicionarVeiculo(veiculos); break;
+            case 2: RemoverVeiculo(veiculos); break;
+            case 3: AtualizarVeiculo(veiculos); break;
+            case 4: ListarVeiculos(veiculos); break;
+            case 5: SalvarEmArquivo(veiculos); break;
+            case 6: RestaurarDeArquivo(veiculos); break;
+            case 0: cout << "Voltando ao menu principal...\n"; break;
+            default: cout << "Opção inválida.\n";
         }
     } while (opcao != 0);
 }
