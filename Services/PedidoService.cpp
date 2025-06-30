@@ -27,13 +27,32 @@ void Pedido::mostrar() const {
 int Pedido::getId() const {
     return pedidoId;
 }
+void Pedido::setId(int id) {
+    this->pedidoId = id;
+}
 
 Local& Pedido::getLocalOrigem() {
     return localOrigem;
 }
 
+void Pedido::setLocalOrigem(Local origem) {
+    this->localOrigem = origem;
+}
+
 Local& Pedido::getLocalDestino() {
     return localDestino;
+}
+
+void Pedido::setLocalDestino(Local destino) {
+    this->localDestino = destino;
+}
+
+double Pedido::getPeso() const {
+    return  peso;
+}
+
+void Pedido::setPeso(double peso) {
+    this->peso = peso;
 }
 
 

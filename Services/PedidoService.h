@@ -3,9 +3,9 @@
 
 #include "../Models/PedidoModel.h"
 #include <vector>
-#include <cstring>
 
 using namespace std;
+
 
 void menuPedidos(vector<Pedido>& pedidos);
 void AdicionarPedido(vector<Pedido>& pedidos);

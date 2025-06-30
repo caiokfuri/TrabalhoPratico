@@ -2,6 +2,7 @@
 #include "Services/VeiculoService.h"
 #include "Services/LocalService.h"
 #include "Services/PedidoService.h"
+#include "Services/EntregaService.h"
 
 
 using namespace std;
@@ -12,6 +13,7 @@ int main() {
     vector<Veiculo> veiculos;
     vector<Local> locais;
     vector<Pedido> pedidos;
+
     // vector<pedido> pedidos;
 
     do {
@@ -26,25 +28,28 @@ int main() {
 
         switch(opt) {
             case 1:
-                cout << "Menu locais" << endl;
+                system("cls");
                 menuLocais(locais);
                 break;
             case 2:
-            cout << "Menu Veiculos" << endl;
+                system("cls");
                 menuVeiculos(veiculos);
                 break;
             case 3:
-                cout << "Voce escolheu o Menu Pedidos." << endl;
+                system("cls");
                 menuPedidos(pedidos);
                 break;
             case 4:
+                system("cls");
+                processarEntrega(veiculos, locais, pedidos);
                 // Funçao de cálculo e mostrar rota de entrega, já atualizando os veiculos e locais
                 break;
             case 5:
+                system("clear");
                 cout << "Saindo do programa..." << endl;
                 break;
             default:
-                cout << "Opcao invalida! Tente novamente." << endl;
+                cout << "Opção inválida! Tente novamente." << endl;
         }
         cout << endl;
     } while(opt != 5);
