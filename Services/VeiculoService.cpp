@@ -172,7 +172,7 @@ void SalvarEmArquivo(const vector<Veiculo>& veiculos) {
 void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
     FILE* file = fopen("veiculos.dat", "rb");
     if (!file) {
-        cout << "Arquivo 'veiculos.dat' não encontrado.\n";
+        cout << "Arquivo 'veiculos.dat' não encontrado." << endl;
         return;
     }
 
@@ -184,7 +184,7 @@ void RestaurarDeArquivo(vector<Veiculo>& veiculos) {
     }
 
     fclose(file);
-    cout << "Dados restaurados de 'veiculos.dat'\n";
+    cout << "Dados restaurados de 'veiculos.dat'" << endl;
 }
 
 void menuVeiculos(vector<Veiculo>& veiculos) {
