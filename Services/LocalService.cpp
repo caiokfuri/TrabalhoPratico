@@ -1,4 +1,5 @@
 #include "LocalService.h"
+#include "DataService.h"
 #include <iostream>
 #include <fstream>
 #include <filesystem>
@@ -27,93 +28,40 @@ void Local::setX(double novoX) { x = novoX; }
 void Local::setY(double novoY) { y = novoY; }
 
 void backupLocais(const vector<Local>& locais) {
-    if (!filesystem::exists("backup")) {
-        filesystem::create_directory("backup");
+    cout << "Iniciando backup de locais..." << endl;
+
+    if (DataService::salvarLocais(locais)) {
+        cout << "Backup realizado com sucesso!" << endl;
+        cout << "Total de locais salvos: " << locais.size() << endl;
+    } else {
+        cout << "Erro ao realizar backup dos locais!" << endl;
     }
-
-    ofstream arquivo("backup/backup_locais.dat", ios::binary);
-
-    if (!arquivo.is_open()) {
-        cout << "Erro ao criar arquivo de backup" << endl;
-        return;
-    }
-
-    int numLocais = (int)locais.size();
-    arquivo.write(reinterpret_cast<const char*>(&numLocais), sizeof(numLocais));
-
-    for (int i = 0; i < (int)locais.size(); i++) {
-        int tamNome = (int)locais[i].getNome().length();
-        arquivo.write(reinterpret_cast<const char*>(&tamNome), sizeof(tamNome));
-
-        arquivo.write(locais[i].getNome().c_str(), tamNome);
-
-        double x = locais[i].getX();
-        double y = locais[i].getY();
-        arquivo.write(reinterpret_cast<const char*>(&x), sizeof(x));
-        arquivo.write(reinterpret_cast<const char*>(&y), sizeof(y));
-    }
-
-    arquivo.close();
-    cout << "Backup realizado com sucesso! Salvo em: backup/backup_locais.dat" << endl;
-    cout << "Total de locais salvos: " << numLocais << endl;
 }
 
 void restaurarLocais(vector<Local>& locais) {
-    ifstream arquivo("backup/backup_locais.dat", ios::binary);
-
-    if (!arquivo.is_open()) {
-        cout << "Arquivo de backup não encontrado!" << endl;
-        return;
-    }
-
     if (!locais.empty()) {
         char opcao;
-        cout << "Existem " << (int)locais.size() << " locais cadastrados." << endl;
-        cout << "Deseja sobrescrever os dados atuais? (s/n): ";
+        cout << "Existem " << locais.size() << " locais cadastrados." << endl;
+        cout << "Deseja sobrescrever os dados atuais? (S/N): ";
         cin >> opcao;
         if (opcao != 's' && opcao != 'S') {
-            arquivo.close();
             cout << "Restauração cancelada." << endl;
             return;
         }
     }
 
-    locais.clear();
+    cout << "Iniciando restauração de locais..." << endl;
 
-    int numLocais;
-    arquivo.read(reinterpret_cast<char*>(&numLocais), sizeof(numLocais));
-
-    if (arquivo.fail()) {
-        cout << "Erro ao ler arquivo de backup!" << endl;
-        arquivo.close();
-        return;
+    if (DataService::carregarLocais(locais)) {
+        cout << "Dados restaurados com sucesso!" << endl;
+        cout << "Total de locais restaurados: " << locais.size() << endl;
+    } else {
+        cout << "Erro ao restaurar dados dos locais!" << endl;
+        cout << "Verifique se existe um arquivo de backup válido." << endl;
     }
-
-    for (int i = 0; i < numLocais; i++) {
-        int tamNome;
-        arquivo.read(reinterpret_cast<char*>(&tamNome), sizeof(tamNome));
-
-        char* buffer = new char[tamNome + 1];
-        arquivo.read(buffer, tamNome);
-        buffer[tamNome] = '\0';
-        string nome(buffer);
-        delete[] buffer;
-
-        double x, y;
-        arquivo.read(reinterpret_cast<char*>(&x), sizeof(x));
-        arquivo.read(reinterpret_cast<char*>(&y), sizeof(y));
-
-        Local local(nome, x, y);
-        locais.push_back(local);
-    }
-
-    arquivo.close();
-    cout << "Dados restaurados com sucesso!" << endl;
-    cout << "Total de locais restaurados: " << numLocais << endl;
 }
 
 void menuLocais(vector<Local>& locais) {
-    system("cls");
     int opcao;
     do {
         cout << "\n--- MENU LOCAIS ---\n";
@@ -135,9 +83,11 @@ void menuLocais(vector<Local>& locais) {
                 RemoverLocal(locais);
                 break;
             case 3:
+                system("cls");
                 AtualizarLocal(locais);
                 break;
             case 4:
+                system("cls");
                 ListarLocais(locais);
                 break;
             case 5:
@@ -156,6 +106,7 @@ void menuLocais(vector<Local>& locais) {
 }
 
 void AdicionarLocal(vector<Local>& locais) {
+    system("cls");
     Local l;
     l.entrada();
     locais.push_back(l);
@@ -163,6 +114,7 @@ void AdicionarLocal(vector<Local>& locais) {
 }
 
 void RemoverLocal(vector<Local>& locais) {
+    system("cls");
     string nomeBusca;
     if (locais.empty()) {
         cout << "Nenhum local cadastrado.\n" << endl;
@@ -198,6 +150,7 @@ void ListarLocais(const vector<Local>& locais) {
 }
 
 void AtualizarLocal(vector<Local>& locais) {
+    system("cls");
     if (locais.empty()) {
         cout << "Nenhum local cadastrado." << endl;
         return;

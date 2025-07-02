@@ -6,12 +6,12 @@
 
     using namespace std;
 
-    void AdicionarVeiculo(vector<Veiculo>& veiculos);
-    void RemoverVeiculo(vector<Veiculo>& veiculos);
-    void AtualizarVeiculo(vector<Veiculo>& veiculos);
-    void ListarVeiculos(const vector<Veiculo>& veiculos);
-    void SalvarEmArquivo(const vector<Veiculo>& veiculos);
-    void RestaurarDeArquivo(vector<Veiculo>& veiculos);
-    void menuVeiculos(std::vector<Veiculo>& veiculos);
+    void AdicionarVeiculo(vector<Veiculo>& frota);
+    void RemoverVeiculo(vector<Veiculo>& frota);
+    void AtualizarVeiculo(vector<Veiculo>& frota);
+    void ListarVeiculos(const vector<Veiculo>& frota);
+    void SalvarEmArquivo(const vector<Veiculo>& frota);
+    void RestaurarDeArquivo(vector<Veiculo>& frota);
+    void menuVeiculos(std::vector<Veiculo>& frota);
 
     #endif

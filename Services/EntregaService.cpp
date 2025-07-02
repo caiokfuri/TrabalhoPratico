@@ -13,16 +13,21 @@ double CalcularDistanciaEntrega(const Local& origem, const Local& destino)
     return calculoDistancia(origem.getX(), origem.getY(), destino.getX(), destino.getY());
 }
 
-Veiculo* veiculoMaisProximo(vector<Veiculo>& veiculos, const Local& localOrigem, const vector<Local>& locais) {
+Veiculo* veiculoMaisProximo(vector<Veiculo>& frota, const Local& localOrigem, const vector<Local>& locais) {
     double minDistancia;
     bool primeiroVeiculo = true;
     Veiculo* veiculoMaisProximo = nullptr;
 
-    for(int i = 0; i < veiculos.size(); i++) {
-        if(veiculos[i].getStatus() == 0) {
+    if (frota.empty())
+    {
+        cout << "Nenhum veículo cadastrado na frota!" << endl;
+    }
+
+    for(int i = 0; i < frota.size(); i++) {
+        if(frota[i].getStatus() == 0) {
             Local localVeiculo;
             for(int j = 0; j < locais.size(); j++) {
-                if(locais[j].getNome() == veiculos[i].getLocalAtual()) {
+                if(locais[j].getNome() == frota[i].getLocalAtual()) {
                     localVeiculo = locais[j];
                     if(primeiroVeiculo) {
                         minDistancia = calculoDistancia(
@@ -31,7 +36,7 @@ Veiculo* veiculoMaisProximo(vector<Veiculo>& veiculos, const Local& localOrigem,
                             localOrigem.getX(),
                             localOrigem.getY()
                         );
-                        veiculoMaisProximo = &veiculos[i];
+                        veiculoMaisProximo = &frota[i];
                         primeiroVeiculo = false;
                     } else {
                         double distancia = calculoDistancia(
@@ -42,7 +47,7 @@ Veiculo* veiculoMaisProximo(vector<Veiculo>& veiculos, const Local& localOrigem,
                         );
                         if(distancia < minDistancia) {
                             minDistancia = distancia;
-                            veiculoMaisProximo = &veiculos[i];
+                            veiculoMaisProximo = &frota[i];
                         }
                     }
                     break;
@@ -53,7 +58,8 @@ Veiculo* veiculoMaisProximo(vector<Veiculo>& veiculos, const Local& localOrigem,
     return veiculoMaisProximo;
 }
 
-void processarEntrega(vector<Veiculo>& frota, vector<Local>& pontos, vector<Pedido>& pedidos) {
+void processarEntrega(vector<Veiculo>& frota, vector<Local>& locais, vector<Pedido>& pedidos) {
+    system("cls");
     cout << "\n---SISTEMA DE ENTREGAS---" << endl;
 
     if(pedidos.empty()) {
@@ -86,7 +92,7 @@ void processarEntrega(vector<Veiculo>& frota, vector<Local>& pontos, vector<Pedi
         return;
     }
 
-    Veiculo* transportador = veiculoMaisProximo(frota, pedidos[posicaoPedido].getLocalOrigem(), pontos);
+    Veiculo* transportador = veiculoMaisProximo(frota, pedidos[posicaoPedido].getLocalOrigem(), locais);
 
     if(transportador == nullptr) {
         cout << "Nenhum veículo disponível para transporte." << endl;
@@ -97,9 +103,9 @@ void processarEntrega(vector<Veiculo>& frota, vector<Local>& pontos, vector<Pedi
     transportador->mostrar();
 
     Local pontoAtual;
-    for(int i = 0; i < pontos.size(); i++) {
-        if(pontos[i].getNome() == transportador->getLocalAtual()) {
-            pontoAtual = pontos[i];
+    for(int i = 0; i < locais.size(); i++) {
+        if(locais[i].getNome() == transportador->getLocalAtual()) {
+            pontoAtual = locais[i];
             break;
         }
     }
@@ -119,8 +125,7 @@ void processarEntrega(vector<Veiculo>& frota, vector<Local>& pontos, vector<Pedi
 
     double percursoTotal = distanciaColeta + distanciaPercurso;
 
-
-    cout << "\nRota em andamento" << endl;
+    cout << "\nRota em andamento..." << endl;
     cout << "\nVeículo em trânsito:" << endl;
     transportador->mostrar();
     cout<< "\nLocal de origem:" << endl;
@@ -133,8 +138,6 @@ void processarEntrega(vector<Veiculo>& frota, vector<Local>& pontos, vector<Pedi
     char resp;
     cin >> resp;
 
-    //Verificar posteriormente a questão da conclusão do pedido
-
     if(resp == 'S' or resp == 's') {
         cout << "\nIniciando transporte" << endl;
         Sleep(2000);
@@ -143,14 +146,4 @@ void processarEntrega(vector<Veiculo>& frota, vector<Local>& pontos, vector<Pedi
         cout << "Entrega concluída!" << endl;
         cout << "Transportador disponível em: " << pedidos[posicaoPedido].getLocalDestino().getNome() << endl;
     }
-
-
-    //transportador->setStatus(1);
-    //cout << "\nIniciando transporte" << endl;
-    //Sleep(2000);
-
-    //transportador->setLocalAtual(pedidos[posicaoPedido].getLocalDestino().getNome());
-    //transportador->setStatus(0);
-    //cout << "Entrega concluída!" << endl;
-    //cout << "Transportador disponível em: " << pedidos[posicaoPedido].getLocalDestino().getNome() << endl;
 }

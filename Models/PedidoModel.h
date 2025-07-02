@@ -5,11 +5,13 @@
 
 class Pedido {
 private:
+    //Atributos
     int pedidoId;
     Local localOrigem;
     Local localDestino;
     double peso;
 public:
+    //Construtores
     Pedido() {
         pedidoId = 0;
         peso = 0;

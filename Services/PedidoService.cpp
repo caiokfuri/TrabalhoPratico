@@ -1,8 +1,8 @@
 #include "PedidoService.h"
+#include "DataService.h"
 #include <iostream>
 
 using namespace std;
-
 
 void Pedido::entrada() {
     cout << "ID do Pedido: ";
@@ -27,6 +27,7 @@ void Pedido::mostrar() const {
 int Pedido::getId() const {
     return pedidoId;
 }
+
 void Pedido::setId(int id) {
     this->pedidoId = id;
 }
@@ -48,15 +49,49 @@ void Pedido::setLocalDestino(Local destino) {
 }
 
 double Pedido::getPeso() const {
-    return  peso;
+    return peso;
 }
 
 void Pedido::setPeso(double peso) {
     this->peso = peso;
 }
 
+void backupPedidos(const vector<Pedido>& pedidos) {
+    cout << "Iniciando backup de pedidos..." << endl;
+
+    if (DataService::salvarPedidos(pedidos)) {
+        cout << "Backup realizado com sucesso!" << endl;
+        cout << "Total de pedidos salvos: " << pedidos.size() << endl;
+    } else {
+        cout << "Erro ao realizar backup dos pedidos!" << endl;
+    }
+}
+
+void restaurarPedidos(vector<Pedido>& pedidos) {
+    if (!pedidos.empty()) {
+        char opcao;
+        cout << "Existem " << pedidos.size() << " pedidos cadastrados." << endl;
+        cout << "Deseja sobrescrever os dados atuais? (S/N): ";
+        cin >> opcao;
+        if (opcao != 's' && opcao != 'S') {
+            cout << "Restauração cancelada." << endl;
+            return;
+        }
+    }
+
+    cout << "Iniciando restauração de pedidos..." << endl;
+
+    if (DataService::carregarPedidos(pedidos)) {
+        cout << "Dados restaurados com sucesso!" << endl;
+        cout << "Total de pedidos restaurados: " << pedidos.size() << endl;
+    } else {
+        cout << "Erro ao restaurar dados dos pedidos!" << endl;
+        cout << "Verifique se existe um arquivo de backup válido." << endl;
+    }
+}
 
 void menuPedidos(vector<Pedido>& pedidos) {
+    system("cls");
     int opcao;
     do {
         cout << "\n--- MENU PEDIDOS ---\n";
@@ -64,27 +99,35 @@ void menuPedidos(vector<Pedido>& pedidos) {
         cout << "2 - Remover Pedido" << endl;
         cout << "3 - Atualizar Pedido" << endl;
         cout << "4 - Listar Pedidos" << endl;
+        cout << "5 - Backup de dados" << endl;
+        cout << "6 - Restaurar dados" << endl;
         cout << "0 - Voltar" << endl;
         cout << "Escolha uma opção: ";
         cin >> opcao;
 
         switch (opcao) {
-            case 1: 
-                AdicionarPedido(pedidos); 
+            case 1:
+                AdicionarPedido(pedidos);
                 break;
-            case 2: 
-                RemoverPedido(pedidos); 
+            case 2:
+                RemoverPedido(pedidos);
                 break;
-            case 3: 
-                AtualizarPedido(pedidos); 
+            case 3:
+                AtualizarPedido(pedidos);
                 break;
-            case 4: 
-                ListarPedidos(pedidos); 
+            case 4:
+                ListarPedidos(pedidos);
                 break;
-            case 0: 
-                cout << "Voltando...\n"; 
+            case 5:
+                backupPedidos(pedidos);
                 break;
-            default: 
+            case 6:
+                restaurarPedidos(pedidos);
+                break;
+            case 0:
+                cout << "Voltando...\n";
+                break;
+            default:
                 cout << "Opção inválida.\n";
         }
     } while (opcao != 0);
@@ -121,7 +164,6 @@ void RemoverPedido(vector<Pedido>& pedidos) {
         cout << "Pedido com ID " << idBusca << " não encontrado.\n";
     }
 }
-
 
 void AtualizarPedido(vector<Pedido>& pedidos) {
     if (pedidos.empty()) {
@@ -160,16 +202,29 @@ void AtualizarPedido(vector<Pedido>& pedidos) {
         cin.ignore();
 
         switch (opcao) {
-            case 1:
+            case 1: {
                 cout << "Alterando Local de Origem:\n";
-                //SET LOCAL DE ORIGEM
+                Local novaOrigem;
+                novaOrigem.entrada();
+                pedidos[indice].setLocalOrigem(novaOrigem);
+                cout << "Local de origem atualizado!\n";
                 break;
-            case 2:
+            }
+            case 2: {
                 cout << "Alterando Local de Destino:\n";
-                //SET LOCAL DE DESTINO
+                Local novoDestino;
+                novoDestino.entrada();
+                pedidos[indice].setLocalDestino(novoDestino);
+                cout << "Local de destino atualizado!\n";
                 break;
+            }
             case 3: {
-                //SET PESO
+                cout << "Novo peso: ";
+                double novoPeso;
+                cin >> novoPeso;
+                pedidos[indice].setPeso(novoPeso);
+                cout << "Peso atualizado!\n";
+                break;
             }
             case 0:
                 cout << "Saindo da atualização.\n";
@@ -179,7 +234,6 @@ void AtualizarPedido(vector<Pedido>& pedidos) {
         }
     } while (opcao != 0);
 }
-
 
 void ListarPedidos(const vector<Pedido>& pedidos) {
     if (pedidos.empty()) {

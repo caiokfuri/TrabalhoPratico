@@ -6,6 +6,7 @@ using namespace std;
 
 class Local {
 private:
+    //Atributos
     string nome;
     double x, y;
 public:

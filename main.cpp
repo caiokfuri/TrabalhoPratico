@@ -16,8 +16,6 @@ int main() {
     vector<Local> locais;
     vector<Pedido> pedidos;
 
-    // vector<pedido> pedidos;
-
     do {
         cout << "--- MENU PRINCIPAL ---" << endl;
         cout << "1 - Menu Locais" << endl;
