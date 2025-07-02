@@ -8,14 +8,16 @@ using namespace std;
 
 class Veiculo {
 private:
+    //Atributos
     string placa;
     string modelo;
     int status;
     string localAtual;
 
 public:
-    Veiculo();
-    Veiculo(const string& placa, const string& modelo, const string& localAtual, int status); 
+    //Construtores
+    Veiculo() : placa(""), modelo(""), localAtual(""), status(0) {}
+    Veiculo(const string& placa, const string& modelo, const string& localAtual, int status) : placa(placa), modelo(modelo), localAtual(localAtual), status(status) {}
 
     void entrada();
     void mostrar() const;

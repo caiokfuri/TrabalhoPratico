@@ -1,28 +1,30 @@
 #include "DataService.h"
 #include <iostream>
 
-const std::string DataService::BACKUP_DIR = "backup/";
+using namespace std;
+
+const string DataService::BACKUP_DIR = "backup/";
 
 bool DataService::criarDiretorioBackup() {
     try {
-        if (!std::filesystem::exists(BACKUP_DIR)) {
-            return std::filesystem::create_directories(BACKUP_DIR);
+        if (!filesystem::exists(BACKUP_DIR)) {
+            return filesystem::create_directories(BACKUP_DIR);
         }
         return true;
-    } catch (const std::exception& e) {
-        std::cerr << "Erro ao criar diretório backup: " << e.what() << std::endl;
+    } catch (const exception& e) {
+        cerr << "Erro ao criar diretório backup: " << e.what() << endl;
         return false;
     }
 }
 
-bool DataService::salvarLocais(const std::vector<Local>& locais) {
+bool DataService::salvarLocais(const vector<Local>& locais) {
     if (!criarDiretorioBackup()) {
         return false;
     }
 
-    std::ofstream arquivo(BACKUP_DIR + "Locais.bin", std::ios::binary);
+    ofstream arquivo(BACKUP_DIR + "Locais.bin", ios::binary);
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir arquivo Locais.bin para escrita" << std::endl;
+        cerr << "Erro ao abrir arquivo Locais.bin para escrita" << endl;
         return false;
     }
 
@@ -30,7 +32,7 @@ bool DataService::salvarLocais(const std::vector<Local>& locais) {
     arquivo.write(reinterpret_cast<const char*>(&tamanho), sizeof(tamanho));
 
     for (const auto& local : locais) {
-        std::string nome = local.getNome();
+        string nome = local.getNome();
         size_t tamanhoNome = nome.size();
         arquivo.write(reinterpret_cast<const char*>(&tamanhoNome), sizeof(tamanhoNome));
         arquivo.write(nome.c_str(), tamanhoNome);
@@ -42,18 +44,18 @@ bool DataService::salvarLocais(const std::vector<Local>& locais) {
     }
 
     arquivo.close();
-    std::cout << "Locais salvos com sucesso em " << BACKUP_DIR << "Locais.bin" << std::endl;
+    cout << "Locais salvos com sucesso em " << BACKUP_DIR << "Locais.bin" << endl;
     return true;
 }
 
-bool DataService::salvarPedidos(const std::vector<Pedido>& pedidos) {
+bool DataService::salvarPedidos(const vector<Pedido>& pedidos) {
     if (!criarDiretorioBackup()) {
         return false;
     }
 
-    std::ofstream arquivo(BACKUP_DIR + "Pedidos.bin", std::ios::binary);
+    ofstream arquivo(BACKUP_DIR + "Pedidos.bin", ios::binary);
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir arquivo Pedidos.bin para escrita" << std::endl;
+        cerr << "Erro ao abrir arquivo Pedidos.bin para escrita" << endl;
         return false;
     }
 
@@ -68,7 +70,7 @@ bool DataService::salvarPedidos(const std::vector<Pedido>& pedidos) {
         arquivo.write(reinterpret_cast<const char*>(&peso), sizeof(peso));
 
         Local origem = const_cast<Pedido&>(pedido).getLocalOrigem();
-        std::string nomeOrigem = origem.getNome();
+        string nomeOrigem = origem.getNome();
         size_t tamanhoNomeOrigem = nomeOrigem.size();
         arquivo.write(reinterpret_cast<const char*>(&tamanhoNomeOrigem), sizeof(tamanhoNomeOrigem));
         arquivo.write(nomeOrigem.c_str(), tamanhoNomeOrigem);
@@ -78,7 +80,7 @@ bool DataService::salvarPedidos(const std::vector<Pedido>& pedidos) {
         arquivo.write(reinterpret_cast<const char*>(&yOrigem), sizeof(yOrigem));
 
         Local destino = const_cast<Pedido&>(pedido).getLocalDestino();
-        std::string nomeDestino = destino.getNome();
+        string nomeDestino = destino.getNome();
         size_t tamanhoNomeDestino = nomeDestino.size();
         arquivo.write(reinterpret_cast<const char*>(&tamanhoNomeDestino), sizeof(tamanhoNomeDestino));
         arquivo.write(nomeDestino.c_str(), tamanhoNomeDestino);
@@ -89,36 +91,36 @@ bool DataService::salvarPedidos(const std::vector<Pedido>& pedidos) {
     }
 
     arquivo.close();
-    std::cout << "Pedidos salvos com sucesso em " << BACKUP_DIR << "Pedidos.bin" << std::endl;
+    cout << "Pedidos salvos com sucesso em " << BACKUP_DIR << "Pedidos.bin" << endl;
     return true;
 }
 
-bool DataService::salvarVeiculos(const std::vector<Veiculo>& veiculos) {
+bool DataService::salvarVeiculos(const vector<Veiculo>& frota) {
     if (!criarDiretorioBackup()) {
         return false;
     }
 
-    std::ofstream arquivo(BACKUP_DIR + "Veiculos.bin", std::ios::binary);
+    ofstream arquivo(BACKUP_DIR + "Veiculos.bin", ios::binary);
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir arquivo Veiculos.bin para escrita" << std::endl;
+        cerr << "Erro ao abrir arquivo Veiculos.bin para escrita" << endl;
         return false;
     }
 
-    size_t tamanho = veiculos.size();
+    size_t tamanho = frota.size();
     arquivo.write(reinterpret_cast<const char*>(&tamanho), sizeof(tamanho));
 
-    for (const auto& veiculo : veiculos) {
-        std::string placa = veiculo.getPlaca();
+    for (const auto& veiculo : frota) {
+        string placa = veiculo.getPlaca();
         size_t tamanhoPlaca = placa.size();
         arquivo.write(reinterpret_cast<const char*>(&tamanhoPlaca), sizeof(tamanhoPlaca));
         arquivo.write(placa.c_str(), tamanhoPlaca);
 
-        std::string modelo = veiculo.getModelo();
+        string modelo = veiculo.getModelo();
         size_t tamanhoModelo = modelo.size();
         arquivo.write(reinterpret_cast<const char*>(&tamanhoModelo), sizeof(tamanhoModelo));
         arquivo.write(modelo.c_str(), tamanhoModelo);
 
-        std::string localAtual = veiculo.getLocalAtual();
+        string localAtual = veiculo.getLocalAtual();
         size_t tamanhoLocal = localAtual.size();
         arquivo.write(reinterpret_cast<const char*>(&tamanhoLocal), sizeof(tamanhoLocal));
         arquivo.write(localAtual.c_str(), tamanhoLocal);
@@ -128,14 +130,14 @@ bool DataService::salvarVeiculos(const std::vector<Veiculo>& veiculos) {
     }
 
     arquivo.close();
-    std::cout << "Veículos salvos com sucesso em " << BACKUP_DIR << "Veiculos.bin" << std::endl;
+    cout << "Veículos salvos com sucesso em " << BACKUP_DIR << "Veiculos.bin" << endl;
     return true;
 }
 
-bool DataService::carregarLocais(std::vector<Local>& locais) {
-    std::ifstream arquivo(BACKUP_DIR + "Locais.bin", std::ios::binary);
+bool DataService::carregarLocais(vector<Local>& locais) {
+    ifstream arquivo(BACKUP_DIR + "Locais.bin", ios::binary);
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir arquivo Locais.bin para leitura" << std::endl;
+        cerr << "Erro ao abrir arquivo Locais.bin para leitura" << endl;
         return false;
     }
 
@@ -147,7 +149,7 @@ bool DataService::carregarLocais(std::vector<Local>& locais) {
     for (size_t i = 0; i < tamanho; ++i) {
         size_t tamanhoNome;
         arquivo.read(reinterpret_cast<char*>(&tamanhoNome), sizeof(tamanhoNome));
-        std::string nome(tamanhoNome, '\0');
+        string nome(tamanhoNome, '\0');
         arquivo.read(&nome[0], tamanhoNome);
 
         double x, y;
@@ -158,14 +160,14 @@ bool DataService::carregarLocais(std::vector<Local>& locais) {
     }
 
     arquivo.close();
-    std::cout << "Locais carregados com sucesso de " << BACKUP_DIR << "Locais.bin" << std::endl;
+    cout << "Locais carregados com sucesso de " << BACKUP_DIR << "Locais.bin" << endl;
     return true;
 }
 
-bool DataService::carregarPedidos(std::vector<Pedido>& pedidos) {
-    std::ifstream arquivo(BACKUP_DIR + "Pedidos.bin", std::ios::binary);
+bool DataService::carregarPedidos(vector<Pedido>& pedidos) {
+    ifstream arquivo(BACKUP_DIR + "Pedidos.bin", ios::binary);
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir arquivo Pedidos.bin para leitura" << std::endl;
+        cerr << "Erro ao abrir arquivo Pedidos.bin para leitura" << endl;
         return false;
     }
 
@@ -183,7 +185,7 @@ bool DataService::carregarPedidos(std::vector<Pedido>& pedidos) {
 
         size_t tamanhoNomeOrigem;
         arquivo.read(reinterpret_cast<char*>(&tamanhoNomeOrigem), sizeof(tamanhoNomeOrigem));
-        std::string nomeOrigem(tamanhoNomeOrigem, '\0');
+        string nomeOrigem(tamanhoNomeOrigem, '\0');
         arquivo.read(&nomeOrigem[0], tamanhoNomeOrigem);
         double xOrigem, yOrigem;
         arquivo.read(reinterpret_cast<char*>(&xOrigem), sizeof(xOrigem));
@@ -192,7 +194,7 @@ bool DataService::carregarPedidos(std::vector<Pedido>& pedidos) {
 
         size_t tamanhoNomeDestino;
         arquivo.read(reinterpret_cast<char*>(&tamanhoNomeDestino), sizeof(tamanhoNomeDestino));
-        std::string nomeDestino(tamanhoNomeDestino, '\0');
+        string nomeDestino(tamanhoNomeDestino, '\0');
         arquivo.read(&nomeDestino[0], tamanhoNomeDestino);
         double xDestino, yDestino;
         arquivo.read(reinterpret_cast<char*>(&xDestino), sizeof(xDestino));
@@ -203,14 +205,14 @@ bool DataService::carregarPedidos(std::vector<Pedido>& pedidos) {
     }
 
     arquivo.close();
-    std::cout << "Pedidos carregados com sucesso de " << BACKUP_DIR << "Pedidos.bin" << std::endl;
+    cout << "Pedidos carregados com sucesso de " << BACKUP_DIR << "Pedidos.bin" << endl;
     return true;
 }
 
-bool DataService::carregarVeiculos(std::vector<Veiculo>& veiculos) {
-    std::ifstream arquivo(BACKUP_DIR + "Veiculos.bin", std::ios::binary);
+bool DataService::carregarVeiculos(vector<Veiculo>& veiculos) {
+    ifstream arquivo(BACKUP_DIR + "Veiculos.bin", ios::binary);
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir arquivo Veiculos.bin para leitura" << std::endl;
+        cerr << "Erro ao abrir arquivo Veiculos.bin para leitura" << endl;
         return false;
     }
 
@@ -222,17 +224,17 @@ bool DataService::carregarVeiculos(std::vector<Veiculo>& veiculos) {
     for (size_t i = 0; i < tamanho; ++i) {
         size_t tamanhoPlaca;
         arquivo.read(reinterpret_cast<char*>(&tamanhoPlaca), sizeof(tamanhoPlaca));
-        std::string placa(tamanhoPlaca, '\0');
+        string placa(tamanhoPlaca, '\0');
         arquivo.read(&placa[0], tamanhoPlaca);
 
         size_t tamanhoModelo;
         arquivo.read(reinterpret_cast<char*>(&tamanhoModelo), sizeof(tamanhoModelo));
-        std::string modelo(tamanhoModelo, '\0');
+        string modelo(tamanhoModelo, '\0');
         arquivo.read(&modelo[0], tamanhoModelo);
 
         size_t tamanhoLocal;
         arquivo.read(reinterpret_cast<char*>(&tamanhoLocal), sizeof(tamanhoLocal));
-        std::string localAtual(tamanhoLocal, '\0');
+        string localAtual(tamanhoLocal, '\0');
         arquivo.read(&localAtual[0], tamanhoLocal);
 
         int status;
@@ -242,6 +244,6 @@ bool DataService::carregarVeiculos(std::vector<Veiculo>& veiculos) {
     }
 
     arquivo.close();
-    std::cout << "Veículos carregados com sucesso de " << BACKUP_DIR << "Veiculos.bin" << std::endl;
+    cout << "Veículos carregados com sucesso de " << BACKUP_DIR << "Veiculos.bin" << endl;
     return true;
 }
