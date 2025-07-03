@@ -1,0 +1,6 @@
+D:/Meus arquivos/PUC Minas/TrabalhoPratico/cmake-build-debug/CMakeFiles/SLEM_TrabalhoPratico.dir
+D:/Meus arquivos/PUC Minas/TrabalhoPratico/cmake-build-debug/CMakeFiles/testesVeiculo.dir
+D:/Meus arquivos/PUC Minas/TrabalhoPratico/cmake-build-debug/CMakeFiles/testesLocais.dir
+D:/Meus arquivos/PUC Minas/TrabalhoPratico/cmake-build-debug/CMakeFiles/testesPedidos.dir
+D:/Meus arquivos/PUC Minas/TrabalhoPratico/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Meus arquivos/PUC Minas/TrabalhoPratico/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.31"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SLEM_TrabalhoPratico",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SLEM_TrabalhoPratico::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SLEM_TrabalhoPratico-Debug-c461fdcb9bca71c38c30.json",
+					"name" : "SLEM_TrabalhoPratico",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "testesLocais::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-testesLocais-Debug-54c4dabffbf919a476b4.json",
+					"name" : "testesLocais",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "testesPedidos::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-testesPedidos-Debug-468466018ec6aba77bf2.json",
+					"name" : "testesPedidos",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "testesVeiculo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-testesVeiculo-Debug-60923251fc2b5f3bee1d.json",
+					"name" : "testesVeiculo",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Meus arquivos/PUC Minas/TrabalhoPratico/cmake-build-debug",
+		"source" : "D:/Meus arquivos/PUC Minas/TrabalhoPratico"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
