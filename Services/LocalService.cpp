@@ -213,3 +213,30 @@ void AtualizarLocal(vector<Local>& locais) {
         }
     } while (opcao != 0);
 }
+
+Local BuscarLocalPorNome(vector<Local>&  locais)
+{
+    if (locais.empty()) {
+        cout << "Nenhum local cadastrado." << endl;
+        return Local();
+    }
+    string nomeBusca;
+    cout << "Digite o nome do local:" << endl;
+    getline(cin, nomeBusca);
+
+
+    if (nomeBusca == "sair") {
+        return Local();
+    }
+
+    for (Local local : locais)
+    {
+        if (local.getNome() == nomeBusca)
+        {
+            return local;
+        }
+    }
+
+    cout << "Local inválido - Informe novamente ou digite 'sair'" << endl;
+    return BuscarLocalPorNome(locais);
+}

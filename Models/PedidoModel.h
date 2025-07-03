@@ -1,6 +1,7 @@
 #ifndef PEDIDOMODEL_H
 #define PEDIDOMODEL_H
 #include "Localmodel.h"
+#include <vector>
 
 
 class Pedido {
@@ -22,7 +23,7 @@ public:
         this->localDestino = destino;
         this->peso = peso;
     }
-    void entrada();
+    void entrada(vector<Local>& locais);
     void mostrar() const;
 
     int getId() const;

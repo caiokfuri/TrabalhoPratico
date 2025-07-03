@@ -39,7 +39,7 @@ int main() {
                 break;
             case 3:
                 system("cls");
-                menuPedidos(pedidos);
+                menuPedidos(pedidos,locais);
                 break;
             case 4:
                 system("cls");

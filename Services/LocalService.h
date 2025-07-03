@@ -14,5 +14,6 @@ void AtualizarLocal(vector<Local>& locais);
 
 void backupLocais(const vector<Local>& locais);
 void restaurarLocais(vector<Local>& locais);
+Local BuscarLocalPorNome(vector<Local>& locais);
 
 #endif

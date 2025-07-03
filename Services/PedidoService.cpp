@@ -2,17 +2,35 @@
 #include "DataService.h"
 #include <iostream>
 
+#include "LocalService.h"
+
 using namespace std;
 
-void Pedido::entrada() {
+void Pedido::entrada(vector<Local>& locais) {
     cout << "ID do Pedido: ";
-    cin >> pedidoId;
+    int id;
+    cin >> id;
+
+    cin.ignore();
     cout << "--- Local de Origem ---" << endl;
-    localOrigem.entrada();
+    localOrigem = BuscarLocalPorNome(locais);
+    if (localOrigem.getNome() == "") {
+        cout << "Cancelando operação..." << endl;
+        _sleep(1500);
+        return;
+    }
+
     cout << "--- Local de Destino ---" << endl;
-    localDestino.entrada();
+    localDestino = BuscarLocalPorNome(locais);
+    if (localDestino.getNome() == "") {
+        cout << "Cancelando operação..." << endl;
+        _sleep(1500);
+        return;
+    }
+
     cout << "Peso: ";
     cin >> peso;
+    pedidoId = id;
 }
 
 void Pedido::mostrar() const {
@@ -90,7 +108,7 @@ void restaurarPedidos(vector<Pedido>& pedidos) {
     }
 }
 
-void menuPedidos(vector<Pedido>& pedidos) {
+void menuPedidos(vector<Pedido>& pedidos, vector<Local>& locais) {
     system("cls");
     int opcao;
     do {
@@ -107,13 +125,13 @@ void menuPedidos(vector<Pedido>& pedidos) {
 
         switch (opcao) {
             case 1:
-                AdicionarPedido(pedidos);
+                AdicionarPedido(pedidos,locais);
                 break;
             case 2:
                 RemoverPedido(pedidos);
                 break;
             case 3:
-                AtualizarPedido(pedidos);
+                AtualizarPedido(pedidos,locais);
                 break;
             case 4:
                 ListarPedidos(pedidos);
@@ -133,9 +151,12 @@ void menuPedidos(vector<Pedido>& pedidos) {
     } while (opcao != 0);
 }
 
-void AdicionarPedido(vector<Pedido>& pedidos) {
+void AdicionarPedido(vector<Pedido>& pedidos,vector<Local>& locais) {
     Pedido pedido;
-    pedido.entrada();
+    pedido.entrada(locais);
+    if (pedido.getId() == 0) {
+        return;
+    }
     pedidos.push_back(pedido);
     cout << "Pedido adicionado com sucesso!\n";
 }
@@ -165,7 +186,7 @@ void RemoverPedido(vector<Pedido>& pedidos) {
     }
 }
 
-void AtualizarPedido(vector<Pedido>& pedidos) {
+void AtualizarPedido(vector<Pedido>& pedidos,vector<Local>& locais) {
     if (pedidos.empty()) {
         cout << "Nenhum pedido cadastrado.\n";
         return;
@@ -205,7 +226,7 @@ void AtualizarPedido(vector<Pedido>& pedidos) {
             case 1: {
                 cout << "Alterando Local de Origem:\n";
                 Local novaOrigem;
-                novaOrigem.entrada();
+                novaOrigem = BuscarLocalPorNome(locais);
                 pedidos[indice].setLocalOrigem(novaOrigem);
                 cout << "Local de origem atualizado!\n";
                 break;
@@ -213,7 +234,7 @@ void AtualizarPedido(vector<Pedido>& pedidos) {
             case 2: {
                 cout << "Alterando Local de Destino:\n";
                 Local novoDestino;
-                novoDestino.entrada();
+                novoDestino = BuscarLocalPorNome(locais);
                 pedidos[indice].setLocalDestino(novoDestino);
                 cout << "Local de destino atualizado!\n";
                 break;
