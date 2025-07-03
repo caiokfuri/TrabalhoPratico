@@ -5,14 +5,12 @@
 #include "Services/EntregaService.h"
 #include "Services/DataService.h"
 
-
-
 using namespace std;
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     int opt = 0;
-    vector<Veiculo> veiculos;
+    vector<Veiculo> frota;
     vector<Local> locais;
     vector<Pedido> pedidos;
 
@@ -35,7 +33,7 @@ int main() {
                 break;
             case 2:
                 system("cls");
-                menuVeiculos(veiculos);
+                menuVeiculos(frota, locais);
                 break;
             case 3:
                 system("cls");
@@ -43,13 +41,13 @@ int main() {
                 break;
             case 4:
                 system("cls");
-                processarEntrega(veiculos, locais, pedidos);
+                processarEntrega(frota, locais, pedidos);
                 break;
             case 5:
                 try {
                     system("cls");
 
-                    DataService::salvarVeiculos(veiculos);
+                    DataService::salvarVeiculos(frota);
                     DataService::salvarPedidos(pedidos);
                     DataService::salvarLocais(locais);
                     cout << "Dados salvos com sucesso" << endl;
@@ -61,7 +59,7 @@ int main() {
             case 6:
                 try {
                     system("cls");
-                    DataService::carregarVeiculos(veiculos);
+                    DataService::carregarVeiculos(frota);
                     DataService::carregarPedidos(pedidos);
                     DataService::carregarLocais(locais);
                     cout << "Dados restaurados com sucesso" << endl;

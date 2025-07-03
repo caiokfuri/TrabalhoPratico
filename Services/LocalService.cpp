@@ -6,14 +6,30 @@
 
 using namespace std;
 
+bool validarCoordenada(double& coordenada, const string& tipo) {
+    while (!(cin >> coordenada)) {
+        cout << "ERRO: Digite apenas números para " << tipo << "!" << endl;
+        cin.clear();
+
+        while (cin.get() != '\n') {
+            continue;
+        }
+
+        cout << tipo << ": ";
+    }
+    return true;
+}
+
 void Local::entrada() {
     cout << "Nome do local: " << endl;
     cin.ignore();
     getline(cin, nome);
+
     cout << "Coordenada X: " << endl;
-    cin >> x;
+    validarCoordenada(x, "Coordenada X");
+
     cout << "Coordenada Y: " << endl;
-    cin >> y;
+    validarCoordenada(y, "Coordenada Y");
 }
 
 void Local::mostrar() const {
@@ -192,7 +208,7 @@ void AtualizarLocal(vector<Local>& locais) {
             case 2: {
                 cout << "Nova coordenada X: ";
                 double novoX;
-                cin >> novoX;
+                validarCoordenada(novoX, "Coordenada X");
                 locais[id].setX(novoX);
                 cout << "Coordenada X atualizada!" << endl;
                 break;
@@ -200,7 +216,7 @@ void AtualizarLocal(vector<Local>& locais) {
             case 3: {
                 cout << "Nova coordenada Y: ";
                 double novoY;
-                cin >> novoY;
+                validarCoordenada(novoY, "Coordenada Y");
                 locais[id].setY(novoY);
                 cout << "Coordenada Y atualizada!" << endl;
                 break;
@@ -214,7 +230,7 @@ void AtualizarLocal(vector<Local>& locais) {
     } while (opcao != 0);
 }
 
-Local BuscarLocalPorNome(vector<Local>&  locais)
+Local BuscarLocalPorNome(vector<Local>& locais)
 {
     if (locais.empty()) {
         cout << "Nenhum local cadastrado." << endl;
@@ -223,7 +239,6 @@ Local BuscarLocalPorNome(vector<Local>&  locais)
     string nomeBusca;
     cout << "Digite o nome do local:" << endl;
     getline(cin, nomeBusca);
-
 
     if (nomeBusca == "sair") {
         return Local();
